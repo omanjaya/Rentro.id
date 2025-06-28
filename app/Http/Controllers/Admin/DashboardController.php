@@ -55,7 +55,7 @@ class DashboardController extends Controller
 
         // Get recent users (cache for 2 minutes)
         $recentUsers = Cache::remember('admin_recent_users', 120, function () {
-            return User::select('id', 'name', 'email', 'role', 'created_at')
+            return User::select('id', 'name', 'email', 'user_type', 'created_at')
                 ->orderBy('created_at', 'desc')
                 ->limit(5)
                 ->get();
@@ -91,31 +91,31 @@ class DashboardController extends Controller
 
     private function getRevenueThisMonth()
     {
-        return Rental::whereRaw("strftime('%Y-%m', created_at) = ?", [Carbon::now()->format('Y-m')])
+        return Rental::whereRaw("DATE_FORMAT(created_at, '%Y-%m') = ?", [Carbon::now()->format('Y-m')])
             ->whereIn('status', ['active', 'completed'])
             ->sum('total_price');
     }
 
     private function getRevenueToday()
     {
-        return Rental::whereRaw("strftime('%Y-%m-%d', created_at) = ?", [Carbon::today()->format('Y-m-d')])
+        return Rental::whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') = ?", [Carbon::today()->format('Y-m-d')])
             ->whereIn('status', ['active', 'completed'])
             ->sum('total_price');
     }
 
     private function getNewUsersThisMonth()
     {
-        return User::whereRaw("strftime('%Y-%m', created_at) = ?", [Carbon::now()->format('Y-m')])
+        return User::whereRaw("DATE_FORMAT(created_at, '%Y-%m') = ?", [Carbon::now()->format('Y-m')])
             ->count();
     }
 
     private function getRentalStatsByMonth()
     {
         return Rental::select(
-                DB::raw("strftime('%m', created_at) as month"),
+                DB::raw("DATE_FORMAT(created_at, '%m') as month"),
                 DB::raw('COUNT(*) as count')
             )
-            ->whereRaw("strftime('%Y', created_at) = ?", [Carbon::now()->year])
+            ->whereRaw("DATE_FORMAT(created_at, '%Y') = ?", [Carbon::now()->year])
             ->groupBy('month')
             ->orderBy('month')
             ->get()
@@ -127,10 +127,10 @@ class DashboardController extends Controller
     private function getRevenueStatsByMonth()
     {
         return Rental::select(
-                DB::raw("strftime('%m', created_at) as month"),
+                DB::raw("DATE_FORMAT(created_at, '%m') as month"),
                 DB::raw('SUM(total_price) as revenue')
             )
-            ->whereRaw("strftime('%Y', created_at) = ?", [Carbon::now()->year])
+            ->whereRaw("DATE_FORMAT(created_at, '%Y') = ?", [Carbon::now()->year])
             ->whereIn('status', ['active', 'completed'])
             ->groupBy('month')
             ->orderBy('month')
