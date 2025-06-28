@@ -12,67 +12,38 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Create new users table with marketplace structure
-        Schema::create('users_new', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('phone', 20)->nullable();
-            $table->text('address')->nullable();
-            $table->enum('user_type', ['individual', 'business', 'vendor', 'admin'])->default('individual');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->string('avatar')->nullable();
+        // Check if the users table already has the marketplace columns
+        if (!Schema::hasColumn('users', 'user_type')) {
+            // Add marketplace columns to existing users table
+            Schema::table('users', function (Blueprint $table) {
+                // Add user type column
+                $table->enum('user_type', ['individual', 'business', 'vendor', 'admin'])->default('individual')->after('address');
+                
+                // Business-related fields
+                $table->string('business_name')->nullable()->after('avatar');
+                $table->string('business_license')->nullable()->after('business_name');
+                $table->text('business_description')->nullable()->after('business_license');
+                
+                // Verification system
+                $table->enum('verification_status', ['pending', 'verified', 'rejected'])->default('pending')->after('business_description');
+                $table->timestamp('verified_at')->nullable()->after('verification_status');
+                $table->text('verification_notes')->nullable()->after('verified_at');
+                
+                // Additional vendor fields
+                $table->decimal('commission_rate', 5, 2)->default(15.00)->after('verification_notes');
+                $table->boolean('featured_vendor')->default(false)->after('commission_rate');
+            });
             
-            // Business-related fields
-            $table->string('business_name')->nullable();
-            $table->string('business_license')->nullable();
-            $table->text('business_description')->nullable();
+            // Update existing data
+            DB::statement("UPDATE users SET user_type = 'admin' WHERE role = 'admin'");
+            DB::statement("UPDATE users SET user_type = 'individual' WHERE role = 'customer'");
+            DB::statement("UPDATE users SET verification_status = 'verified' WHERE role = 'admin'");
             
-            // Verification system
-            $table->enum('verification_status', ['pending', 'verified', 'rejected'])->default('pending');
-            $table->timestamp('verified_at')->nullable();
-            $table->text('verification_notes')->nullable();
-            
-            // Additional vendor fields
-            $table->decimal('commission_rate', 5, 2)->default(15.00);
-            $table->boolean('featured_vendor')->default(false);
-            
-            $table->rememberToken();
-            $table->timestamps();
-        });
-
-        // Copy data from old table, converting role to user_type
-        DB::statement("
-            INSERT INTO users_new (
-                id, name, email, email_verified_at, password, phone, address, 
-                user_type, status, avatar, verification_status, commission_rate, 
-                featured_vendor, remember_token, created_at, updated_at
-            )
-            SELECT 
-                id, name, email, email_verified_at, password, phone, address,
-                CASE 
-                    WHEN role = 'admin' THEN 'admin'
-                    ELSE 'individual'
-                END as user_type,
-                'active' as status,
-                avatar,
-                CASE 
-                    WHEN role = 'admin' THEN 'verified'
-                    ELSE 'pending'
-                END as verification_status,
-                15.00 as commission_rate,
-                0 as featured_vendor,
-                remember_token, created_at, updated_at
-            FROM users
-        ");
-
-        // Drop old table
-        Schema::dropIfExists('users');
-        
-        // Rename new table
-        Schema::rename('users_new', 'users');
+            // Drop the old role column
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropColumn('role');
+            });
+        }
     }
 
     /**
@@ -80,39 +51,26 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Create old users table structure
-        Schema::create('users_old', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('phone', 20)->nullable();
-            $table->text('address')->nullable();
-            $table->enum('role', ['customer', 'admin'])->default('customer');
-            $table->string('avatar')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            // Add back role column
+            $table->enum('role', ['customer', 'admin'])->default('customer')->after('address');
+            
+            // Drop marketplace columns
+            $table->dropColumn([
+                'user_type',
+                'business_name',
+                'business_license', 
+                'business_description',
+                'verification_status',
+                'verified_at',
+                'verification_notes',
+                'commission_rate',
+                'featured_vendor'
+            ]);
         });
-
-        // Copy data back, converting user_type to role
-        DB::statement("
-            INSERT INTO users_old (
-                id, name, email, email_verified_at, password, phone, address, 
-                role, avatar, remember_token, created_at, updated_at
-            )
-            SELECT 
-                id, name, email, email_verified_at, password, phone, address,
-                CASE 
-                    WHEN user_type = 'admin' THEN 'admin'
-                    ELSE 'customer'
-                END as role,
-                avatar, remember_token, created_at, updated_at
-            FROM users
-        ");
-
-        // Drop current table and rename old one back
-        Schema::dropIfExists('users');
-        Schema::rename('users_old', 'users');
+        
+        // Restore role data
+        DB::statement("UPDATE users SET role = 'admin' WHERE user_type = 'admin'");
+        DB::statement("UPDATE users SET role = 'customer' WHERE user_type != 'admin'");
     }
 };
