@@ -16,50 +16,84 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Get basic statistics (cache for 5 minutes)
-        $stats = Cache::remember('admin_dashboard_stats', 300, function () {
-            return [
-                'total_products' => Product::count(),
-                'total_categories' => Category::count(),
-                'total_customers' => User::whereIn('user_type', ['individual', 'business'])->count(),
-                'total_admins' => User::where('user_type', 'admin')->count(),
-                'total_users' => User::count(),
-                'new_users_this_month' => $this->getNewUsersThisMonth(),
-                'total_rentals' => Rental::count(),
-                'active_rentals' => Rental::where('status', 'active')->count(),
-                'pending_rentals' => Rental::where('status', 'pending')->count(),
-                'completed_rentals' => Rental::where('status', 'completed')->count(),
-                'revenue_this_month' => $this->getRevenueThisMonth(),
-                'revenue_today' => $this->getRevenueToday(),
+        try {
+            // Get basic statistics (cache for 5 minutes)
+            $stats = Cache::remember('admin_dashboard_stats', 300, function () {
+                return [
+                    'total_products' => Product::count(),
+                    'total_categories' => Category::count(),
+                    'total_customers' => User::whereIn('user_type', ['individual', 'business'])->count(),
+                    'total_admins' => User::where('user_type', 'admin')->count(),
+                    'total_users' => User::count(),
+                    'new_users_this_month' => $this->getNewUsersThisMonth(),
+                    'total_rentals' => Rental::count(),
+                    'active_rentals' => Rental::where('status', 'active')->count(),
+                    'pending_rentals' => Rental::where('status', 'pending')->count(),
+                    'completed_rentals' => Rental::where('status', 'completed')->count(),
+                    'revenue_this_month' => $this->getRevenueThisMonth(),
+                    'revenue_today' => $this->getRevenueToday(),
+                ];
+            });
+        } catch (\Exception $e) {
+            // Fallback stats in case of database errors
+            $stats = [
+                'total_products' => 0,
+                'total_categories' => 0,
+                'total_customers' => 0,
+                'total_admins' => 0,
+                'total_users' => 0,
+                'new_users_this_month' => 0,
+                'total_rentals' => 0,
+                'active_rentals' => 0,
+                'pending_rentals' => 0,
+                'completed_rentals' => 0,
+                'revenue_this_month' => 0,
+                'revenue_today' => 0,
             ];
-        });
+            \Log::error('Admin dashboard stats error: ' . $e->getMessage());
+        }
 
         // Get recent rentals (cache for 2 minutes)
-        $recentRentals = Cache::remember('admin_recent_rentals', 120, function () {
-            return Rental::with(['user:id,name,email', 'product:id,name,image'])
-                ->select('id', 'user_id', 'product_id', 'rental_code', 'total_price', 'status', 'created_at')
-                ->orderBy('created_at', 'desc')
-                ->limit(5)
-                ->get();
-        });
+        try {
+            $recentRentals = Cache::remember('admin_recent_rentals', 120, function () {
+                return Rental::with(['user:id,name,email', 'product:id,name,image'])
+                    ->select('id', 'user_id', 'product_id', 'rental_code', 'total_price', 'status', 'created_at')
+                    ->orderBy('created_at', 'desc')
+                    ->limit(5)
+                    ->get();
+            });
+        } catch (\Exception $e) {
+            $recentRentals = collect();
+            \Log::error('Admin recent rentals error: ' . $e->getMessage());
+        }
 
         // Get top products (cache for 30 minutes)
-        $topProducts = Cache::remember('admin_top_products', 1800, function () {
-            return Product::with('category:id,name')
-                ->withCount('rentals')
-                ->select('id', 'category_id', 'name', 'price_per_day')
-                ->orderBy('rentals_count', 'desc')
-                ->limit(5)
-                ->get();
-        });
+        try {
+            $topProducts = Cache::remember('admin_top_products', 1800, function () {
+                return Product::with('category:id,name')
+                    ->withCount('rentals')
+                    ->select('id', 'category_id', 'name', 'price_per_day')
+                    ->orderBy('rentals_count', 'desc')
+                    ->limit(5)
+                    ->get();
+            });
+        } catch (\Exception $e) {
+            $topProducts = collect();
+            \Log::error('Admin top products error: ' . $e->getMessage());
+        }
 
         // Get recent users (cache for 2 minutes)
-        $recentUsers = Cache::remember('admin_recent_users', 120, function () {
-            return User::select('id', 'name', 'email', 'user_type', 'created_at')
-                ->orderBy('created_at', 'desc')
-                ->limit(5)
-                ->get();
-        });
+        try {
+            $recentUsers = Cache::remember('admin_recent_users', 120, function () {
+                return User::select('id', 'name', 'email', 'user_type', 'created_at')
+                    ->orderBy('created_at', 'desc')
+                    ->limit(5)
+                    ->get();
+            });
+        } catch (\Exception $e) {
+            $recentUsers = collect();
+            \Log::error('Admin recent users error: ' . $e->getMessage());
+        }
 
         // Get rental statistics by month (cache for 1 hour, with fallback)
         try {
