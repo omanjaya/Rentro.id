@@ -62,7 +62,7 @@ class DashboardController extends Controller
     {
         return Rental::where('user_id', $business->id)
             ->whereIn('status', ['active', 'completed'])
-            ->whereRaw("strftime('%Y-%m', created_at) = ?", [Carbon::now()->format('Y-m')])
+            ->whereRaw("DATE_FORMAT(created_at, '%Y-%m') = ?", [Carbon::now()->format('Y-m')])
             ->sum('total_price');
     }
 
@@ -103,7 +103,7 @@ class DashboardController extends Controller
             $months[] = $date->format('M Y');
             $spending[] = Rental::where('user_id', $business->id)
                 ->whereIn('status', ['active', 'completed'])
-                ->whereRaw("strftime('%Y-%m', created_at) = ?", [$monthKey])
+                ->whereRaw("DATE_FORMAT(created_at, '%Y-%m') = ?", [$monthKey])
                 ->sum('total_price');
         }
 

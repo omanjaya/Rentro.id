@@ -77,7 +77,7 @@ class DashboardController extends Controller
             $query->where('vendor_id', $vendor->id);
         })
         ->whereIn('status', ['active', 'completed'])
-        ->whereRaw("strftime('%Y-%m', created_at) = ?", [Carbon::now()->format('Y-m')])
+        ->whereRaw("DATE_FORMAT(created_at, '%Y-%m') = ?", [Carbon::now()->format('Y-m')])
         ->get()
         ->sum(function ($rental) {
             $commissionAmount = $rental->product->getCommissionAmount($rental->total_price);

@@ -72,7 +72,7 @@ class RentalController extends Controller
                 'pending_rentals' => $rentals->where('status', 'pending')->count(),
                 'active_rentals' => $rentals->where('status', 'active')->count(),
                 'completed_rentals' => $rentals->where('status', 'completed')->count(),
-                'this_month_rentals' => $rentals->whereRaw("strftime('%Y-%m', created_at) = ?", [Carbon::now()->format('Y-m')])->count(),
+                'this_month_rentals' => $rentals->whereRaw("DATE_FORMAT(created_at, '%Y-%m') = ?", [Carbon::now()->format('Y-m')])->count(),
                 'total_revenue' => $this->calculateTotalRevenue($vendor),
                 'this_month_revenue' => $this->calculateMonthlyRevenue($vendor),
             ];
@@ -188,7 +188,7 @@ class RentalController extends Controller
             $query->where('vendor_id', $vendor->id);
         })
         ->whereIn('status', ['active', 'completed'])
-        ->whereRaw("strftime('%Y-%m', created_at) = ?", [Carbon::now()->format('Y-m')])
+        ->whereRaw("DATE_FORMAT(created_at, '%Y-%m') = ?", [Carbon::now()->format('Y-m')])
         ->get()
         ->sum(function ($rental) {
             $commissionAmount = $rental->product->getCommissionAmount($rental->total_price);
