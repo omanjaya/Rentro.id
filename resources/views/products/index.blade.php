@@ -81,7 +81,7 @@
                                 @if($product->image)
                                     <img src="{{ $product->image_url }}" 
                                          loading="lazy" 
-                                         onerror="this.src='https://via.placeholder.com/500x300?text=No+Image'"
+                                         onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&h=300&fit=crop'"
                                          alt="{{ $product->name }}" 
                                          class="w-full h-48 object-cover">
                                 @else

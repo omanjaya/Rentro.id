@@ -142,7 +142,7 @@
                         <img src="{{ $product->image_url }}" 
                              alt="{{ $product->name }}" 
                              loading="lazy"
-                             onerror="this.src='https://via.placeholder.com/500x300?text=No+Image'"
+                             onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&h=300&fit=crop'"
                              class="w-full rounded-lg">
                     @else
                         <div class="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
@@ -160,7 +160,7 @@
                                     <img src="{{ $galleryImage }}" 
                                          alt="{{ $product->name }}" 
                                          loading="lazy"
-                                         onerror="this.src='https://via.placeholder.com/150x150?text=No+Image'"
+                                         onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=150&h=150&fit=crop'"
                                          class="w-full h-20 object-cover rounded">
                                 @endforeach
                             </div>
