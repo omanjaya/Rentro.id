@@ -122,8 +122,21 @@ class Product extends Model
             return $this->image;
         }
         
-        // Otherwise, treat as local storage file
-        return $this->image ? asset('storage/' . $this->image) : 'https://via.placeholder.com/500x300/cccccc/666666?text=No+Image';
+        // If local storage image exists
+        if ($this->image) {
+            return asset('storage/' . $this->image);
+        }
+        
+        // Fallback to a better default image based on category
+        $defaultImages = [
+            1 => 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=500&h=300&fit=crop', // Laptop
+            2 => 'https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=500&h=300&fit=crop', // Camera
+            3 => 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&h=300&fit=crop', // Audio
+            4 => 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=500&h=300&fit=crop', // Gaming
+            5 => 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&h=300&fit=crop', // Mobile
+        ];
+        
+        return $defaultImages[$this->category_id] ?? 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&h=300&fit=crop';
     }
 
     public function getGalleryUrlsAttribute()
