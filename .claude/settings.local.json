@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(composer create-project:*)",
+      "Bash(composer:*)",
+      "Bash(php artisan breeze:install:*)",
+      "Bash(php artisan make:migration:*)",
+      "Bash(php artisan migrate:*)",
+      "Bash(php artisan make:model:*)",
+      "Bash(php artisan make:controller:*)",
+      "Bash(php artisan make:middleware:*)",
+      "Bash(npm create:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss init:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run build:*)",
+      "Bash(php artisan make:seeder:*)",
+      "Bash(php artisan:*)",
+      "Bash(rm:*)",
+      "Bash(curl:*)",
+      "Bash(timeout:*)",
+      "Bash(touch:*)",
+      "Bash(npm run dev:*)",
+      "Bash(ss:*)",
+      "Bash(mv:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(cp:*)",
+      "Bash(rg:*)",
+      "Bash(php:*)"
+    ],
+    "deny": []
+  }
+}
