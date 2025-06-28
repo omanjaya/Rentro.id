@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@rentro.id',
             'password' => Hash::make('password'),
-            'role' => 'admin',
+            'user_type' => 'admin',
             'phone' => '081234567890',
             'address' => 'Jakarta, Indonesia',
         ]);
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'password' => Hash::make('password'),
-            'role' => 'customer',
+            'user_type' => 'individual',
             'phone' => '081234567891',
             'address' => 'Bandung, Indonesia',
         ]);
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'name' => 'Jane Smith',
             'email' => 'jane@example.com',
             'password' => Hash::make('password'),
-            'role' => 'customer',
+            'user_type' => 'individual',
             'phone' => '081234567892',
             'address' => 'Surabaya, Indonesia',
         ]);

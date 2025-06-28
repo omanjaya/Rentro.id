@@ -20,7 +20,7 @@ class AdminUserSeeder extends Seeder
             'password' => Hash::make('password'),
             'phone' => '+62812345678',
             'address' => 'Jl. Admin No. 1, Jakarta, Indonesia',
-            'role' => 'admin',
+            'user_type' => 'admin',
             'email_verified_at' => now(),
         ]);
 
@@ -32,7 +32,7 @@ class AdminUserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'phone' => '+62811234567',
                 'address' => 'Jl. Customer No. 1, Jakarta, Indonesia',
-                'role' => 'customer',
+                'user_type' => 'individual',
                 'email_verified_at' => now(),
             ],
             [
@@ -41,7 +41,7 @@ class AdminUserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'phone' => '+62812345679',
                 'address' => 'Jl. Customer No. 2, Bandung, Indonesia',
-                'role' => 'customer',
+                'user_type' => 'individual',
                 'email_verified_at' => now(),
             ],
             [
@@ -50,7 +50,7 @@ class AdminUserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'phone' => '+62813456789',
                 'address' => 'Jl. Customer No. 3, Surabaya, Indonesia',
-                'role' => 'customer',
+                'user_type' => 'individual',
                 'email_verified_at' => now(),
             ]
         ];

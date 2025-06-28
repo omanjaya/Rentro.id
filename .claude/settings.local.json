@@ -29,7 +29,9 @@
       "Bash(grep:*)",
       "Bash(cp:*)",
       "Bash(rg:*)",
-      "Bash(php:*)"
+      "Bash(php:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
