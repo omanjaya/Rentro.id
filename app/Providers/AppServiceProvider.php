@@ -38,5 +38,10 @@ class AppServiceProvider extends ServiceProvider
                 }
             });
         }
+        
+        // Fix for Hostinger storage link issue
+        $this->app->bind('path.public', function() {
+            return base_path('public');
+        });
     }
 }
