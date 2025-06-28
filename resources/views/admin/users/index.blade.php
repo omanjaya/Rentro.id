@@ -28,13 +28,15 @@
                 </div>
                 
                 <div class="md:w-40">
-                    <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                    <select name="role" 
-                            id="role"
+                    <label for="user_type" class="block text-sm font-medium text-gray-700 mb-1">User Type</label>
+                    <select name="user_type" 
+                            id="user_type"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
-                        <option value="">All Roles</option>
-                        <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
-                        <option value="customer" {{ request('role') === 'customer' ? 'selected' : '' }}>Customer</option>
+                        <option value="">All Types</option>
+                        <option value="individual" {{ request('user_type') === 'individual' ? 'selected' : '' }}>Individual</option>
+                        <option value="business" {{ request('user_type') === 'business' ? 'selected' : '' }}>Business</option>
+                        <option value="vendor" {{ request('user_type') === 'vendor' ? 'selected' : '' }}>Vendor</option>
+                        <option value="admin" {{ request('user_type') === 'admin' ? 'selected' : '' }}>Admin</option>
                     </select>
                 </div>
 
@@ -54,7 +56,7 @@
                             class="bg-primary-600 text-white px-6 py-2 rounded-md hover:bg-primary-700">
                         Search
                     </button>
-                    @if(request()->hasAny(['search', 'role', 'status']))
+                    @if(request()->hasAny(['search', 'user_type', 'status']))
                         <a href="{{ route('admin.users.index') }}" 
                            class="bg-gray-200 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-300">
                             Clear
@@ -72,7 +74,7 @@
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User Type</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rentals</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined</th>
@@ -111,10 +113,12 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full 
-                                        @if($user->role === 'admin') bg-purple-100 text-purple-800
+                                        @if($user->user_type === 'admin') bg-purple-100 text-purple-800
+                                        @elseif($user->user_type === 'vendor') bg-green-100 text-green-800
+                                        @elseif($user->user_type === 'business') bg-yellow-100 text-yellow-800
                                         @else bg-blue-100 text-blue-800
                                         @endif">
-                                        {{ ucfirst($user->role) }}
+                                        {{ ucfirst($user->user_type) }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -182,7 +186,7 @@
                                         </svg>
                                         <h3 class="mt-2 text-sm font-medium text-gray-900">No users found</h3>
                                         <p class="mt-1 text-sm text-gray-500">
-                                            @if(request()->hasAny(['search', 'role']))
+                                            @if(request()->hasAny(['search', 'user_type']))
                                                 Try adjusting your search criteria.
                                             @else
                                                 Get started by creating a new user.

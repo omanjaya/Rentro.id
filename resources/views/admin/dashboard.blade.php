@@ -338,10 +338,12 @@
                                 </div>
                                 <div class="text-right">
                                     <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full 
-                                        @if($user->role === 'admin') bg-purple-100 text-purple-800
+                                        @if($user->user_type === 'admin') bg-purple-100 text-purple-800
+                                        @elseif($user->user_type === 'vendor') bg-green-100 text-green-800
+                                        @elseif($user->user_type === 'business') bg-yellow-100 text-yellow-800
                                         @else bg-blue-100 text-blue-800
                                         @endif">
-                                        {{ ucfirst($user->role) }}
+                                        {{ ucfirst($user->user_type) }}
                                     </span>
                                 </div>
                             </div>

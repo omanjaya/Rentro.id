@@ -27,9 +27,9 @@ class UserController extends Controller
             });
         }
 
-        // Role filter
-        if ($request->filled('role')) {
-            $query->where('role', $request->role);
+        // User type filter
+        if ($request->filled('user_type')) {
+            $query->where('user_type', $request->user_type);
         }
 
         // Status filter (if you want to add active/inactive later)
@@ -63,7 +63,7 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:500',
-            'role' => 'required|in:admin,customer',
+            'user_type' => 'required|in:admin,individual,business,vendor',
             'status' => 'nullable|in:active,inactive',
         ]);
 
@@ -73,7 +73,7 @@ class UserController extends Controller
             'password' => Hash::make($validated['password']),
             'phone' => $validated['phone'],
             'address' => $validated['address'],
-            'role' => $validated['role'],
+            'user_type' => $validated['user_type'],
             'status' => $validated['status'] ?? 'active',
             'email_verified_at' => now(),
         ]);
@@ -125,7 +125,7 @@ class UserController extends Controller
             'password' => 'nullable|string|min:8|confirmed',
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:500',
-            'role' => 'required|in:admin,customer',
+            'user_type' => 'required|in:admin,individual,business,vendor',
             'status' => 'required|in:active,inactive',
         ]);
 
@@ -133,7 +133,7 @@ class UserController extends Controller
         $user->email = $validated['email'];
         $user->phone = $validated['phone'];
         $user->address = $validated['address'];
-        $user->role = $validated['role'];
+        $user->user_type = $validated['user_type'];
         $user->status = $validated['status'];
 
         if (!empty($validated['password'])) {

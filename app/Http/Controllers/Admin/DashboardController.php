@@ -21,8 +21,8 @@ class DashboardController extends Controller
             return [
                 'total_products' => Product::count(),
                 'total_categories' => Category::count(),
-                'total_customers' => User::where('role', 'customer')->count(),
-                'total_admins' => User::where('role', 'admin')->count(),
+                'total_customers' => User::whereIn('user_type', ['individual', 'business'])->count(),
+                'total_admins' => User::where('user_type', 'admin')->count(),
                 'total_users' => User::count(),
                 'new_users_this_month' => $this->getNewUsersThisMonth(),
                 'total_rentals' => Rental::count(),

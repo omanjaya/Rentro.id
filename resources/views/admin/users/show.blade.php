@@ -49,12 +49,14 @@
                         @endif
                         
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">User Type</label>
                             <span class="inline-flex px-3 py-1 text-sm font-semibold rounded-full 
-                                @if($user->role === 'admin') bg-purple-100 text-purple-800
+                                @if($user->user_type === 'admin') bg-purple-100 text-purple-800
+                                @elseif($user->user_type === 'vendor') bg-green-100 text-green-800
+                                @elseif($user->user_type === 'business') bg-yellow-100 text-yellow-800
                                 @else bg-blue-100 text-blue-800
                                 @endif">
-                                {{ ucfirst($user->role) }}
+                                {{ ucfirst($user->user_type) }}
                             </span>
                         </div>
                         

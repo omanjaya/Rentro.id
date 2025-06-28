@@ -15,7 +15,7 @@ class RentalSeeder extends Seeder
      */
     public function run(): void
     {
-        $customers = User::where('role', 'customer')->get();
+        $customers = User::whereIn('user_type', ['individual', 'business'])->get();
         $products = Product::all();
 
         if ($customers->isEmpty() || $products->isEmpty()) {

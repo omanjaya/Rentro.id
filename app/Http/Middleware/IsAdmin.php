@@ -19,7 +19,7 @@ class IsAdmin
             return redirect()->route('login');
         }
         
-        if (auth()->user()->role !== 'admin') {
+        if (auth()->user()->user_type !== 'admin') {
             abort(403, 'Access denied. Admin privileges required.');
         }
         

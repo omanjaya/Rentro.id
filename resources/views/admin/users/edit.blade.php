@@ -68,24 +68,26 @@
                         @enderror
                     </div>
 
-                    <!-- Role -->
+                    <!-- User Type -->
                     <div>
-                        <label for="role" class="block text-sm font-medium text-gray-700 mb-1">
-                            Role <span class="text-red-500">*</span>
+                        <label for="user_type" class="block text-sm font-medium text-gray-700 mb-1">
+                            User Type <span class="text-red-500">*</span>
                         </label>
-                        <select name="role" 
-                                id="role" 
+                        <select name="user_type" 
+                                id="user_type" 
                                 required
                                 @if($user->id === auth()->id()) disabled @endif
-                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('role') border-red-300 @enderror">
-                            <option value="customer" {{ old('role', $user->role) === 'customer' ? 'selected' : '' }}>Customer</option>
-                            <option value="admin" {{ old('role', $user->role) === 'admin' ? 'selected' : '' }}>Admin</option>
+                                class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('user_type') border-red-300 @enderror">
+                            <option value="individual" {{ old('user_type', $user->user_type) === 'individual' ? 'selected' : '' }}>Individual</option>
+                            <option value="business" {{ old('user_type', $user->user_type) === 'business' ? 'selected' : '' }}>Business</option>
+                            <option value="vendor" {{ old('user_type', $user->user_type) === 'vendor' ? 'selected' : '' }}>Vendor</option>
+                            <option value="admin" {{ old('user_type', $user->user_type) === 'admin' ? 'selected' : '' }}>Admin</option>
                         </select>
                         @if($user->id === auth()->id())
-                            <p class="mt-1 text-sm text-gray-500">You cannot change your own role.</p>
-                            <input type="hidden" name="role" value="{{ $user->role }}">
+                            <p class="mt-1 text-sm text-gray-500">You cannot change your own user type.</p>
+                            <input type="hidden" name="user_type" value="{{ $user->user_type }}">
                         @endif
-                        @error('role')
+                        @error('user_type')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
