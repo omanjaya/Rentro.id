@@ -28,9 +28,9 @@ class QueryLogServiceProvider extends ServiceProvider
                     'connection' => $query->connectionName,
                 ]);
                 
-                // Log slow queries (>100ms) to a separate channel
+                // Log slow queries (>100ms) to main log
                 if ($query->time > 100) {
-                    \Illuminate\Support\Facades\Log::channel('slow_queries')->warning('Slow query detected', [
+                    \Illuminate\Support\Facades\Log::warning('Slow query detected', [
                         'sql' => $query->sql,
                         'bindings' => $query->bindings,
                         'time' => $query->time . 'ms',
