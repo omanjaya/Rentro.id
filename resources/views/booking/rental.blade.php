@@ -3,17 +3,17 @@
         <div class="flex justify-between items-center">
             <div>
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Rental Details: {{ $rental->rental_code }}
+                    Detail Penyewaan: {{ $rental->rental_code }}
                 </h2>
                 <p class="text-sm text-gray-600 mt-1">
-                    View your rental information and status
+                    Lihat informasi dan status penyewaan Anda
                 </p>
             </div>
             
             <div class="flex space-x-3">
                 <a href="{{ route('my-rentals') }}" 
                    class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                    Back to My Rentals
+                    Kembali ke Penyewaan Saya
                 </a>
             </div>
         </div>
@@ -32,9 +32,9 @@
                             </svg>
                         </div>
                         <div class="ml-3">
-                            <h3 class="text-sm font-medium text-yellow-800">Pending Approval</h3>
+                            <h3 class="text-sm font-medium text-yellow-800">Menunggu Persetujuan</h3>
                             <p class="mt-1 text-sm text-yellow-700">
-                                Your rental request is being reviewed by the vendor. You will be notified once it's approved.
+                                Permintaan penyewaan Anda sedang ditinjau oleh vendor. Anda akan diberitahu setelah disetujui.
                             </p>
                         </div>
                     </div>
@@ -48,9 +48,9 @@
                             </svg>
                         </div>
                         <div class="ml-3">
-                            <h3 class="text-sm font-medium text-blue-800">Active Rental</h3>
+                            <h3 class="text-sm font-medium text-blue-800">Penyewaan Aktif</h3>
                             <p class="mt-1 text-sm text-blue-700">
-                                Your rental is active! Please take care of the equipment and return it on time.
+                                Penyewaan Anda aktif! Harap rawat peralatan dengan baik dan kembalikan tepat waktu.
                             </p>
                         </div>
                     </div>
@@ -64,9 +64,9 @@
                             </svg>
                         </div>
                         <div class="ml-3">
-                            <h3 class="text-sm font-medium text-green-800">Rental Completed</h3>
+                            <h3 class="text-sm font-medium text-green-800">Penyewaan Selesai</h3>
                             <p class="mt-1 text-sm text-green-700">
-                                Thank you for using our service! We hope you had a great experience.
+                                Terima kasih telah menggunakan layanan kami! Kami harap Anda mendapat pengalaman yang luar biasa.
                             </p>
                         </div>
                     </div>
@@ -80,9 +80,9 @@
                             </svg>
                         </div>
                         <div class="ml-3">
-                            <h3 class="text-sm font-medium text-red-800">Rental Cancelled</h3>
+                            <h3 class="text-sm font-medium text-red-800">Penyewaan Dibatalkan</h3>
                             <p class="mt-1 text-sm text-red-700">
-                                This rental has been cancelled. If you have any questions, please contact support.
+                                Penyewaan ini telah dibatalkan. Jika Anda memiliki pertanyaan, silakan hubungi dukungan.
                             </p>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                 <div class="lg:col-span-2 space-y-6">
                     <!-- Product Information -->
                     <div class="bg-white shadow-sm rounded-lg p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Product Information</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Informasi Produk</h3>
                         
                         <div class="flex items-start space-x-4">
                             @if($rental->product->image)
@@ -125,7 +125,7 @@
                                         </span>
                                     @else
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Platform Product
+                                            Produk Platform
                                         </span>
                                     @endif
                                 </div>
@@ -133,7 +133,7 @@
                                 <!-- Product Specifications -->
                                 @if($rental->product->parsed_specifications)
                                     <div class="mt-4">
-                                        <h5 class="text-sm font-medium text-gray-700 mb-2">Specifications</h5>
+                                        <h5 class="text-sm font-medium text-gray-700 mb-2">Spesifikasi</h5>
                                         <dl class="grid grid-cols-2 gap-2">
                                             @foreach($rental->product->parsed_specifications as $spec)
                                                 @if(!empty($spec['key']) && !empty($spec['value']))
@@ -152,11 +152,11 @@
 
                     <!-- Rental Details -->
                     <div class="bg-white shadow-sm rounded-lg p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Rental Information</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Informasi Penyewaan</h3>
                         
                         <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <dt class="text-sm font-medium text-gray-500">Rental Code</dt>
+                                <dt class="text-sm font-medium text-gray-500">Kode Penyewaan</dt>
                                 <dd class="mt-1 text-sm font-mono text-gray-900 bg-gray-50 px-2 py-1 rounded">{{ $rental->rental_code }}</dd>
                             </div>
                             
@@ -169,28 +169,32 @@
                                         @elseif($rental->status === 'completed') bg-green-100 text-green-800
                                         @else bg-red-100 text-red-800
                                         @endif">
-                                        {{ ucfirst($rental->status) }}
+                                        @if($rental->status === 'pending') Menunggu
+                                        @elseif($rental->status === 'active') Aktif
+                                        @elseif($rental->status === 'completed') Selesai
+                                        @else Dibatalkan
+                                        @endif
                                     </span>
                                 </dd>
                             </div>
                             
                             <div>
-                                <dt class="text-sm font-medium text-gray-500">Start Date</dt>
+                                <dt class="text-sm font-medium text-gray-500">Tanggal Mulai</dt>
                                 <dd class="mt-1 text-sm text-gray-900">{{ $rental->start_date->format('F d, Y') }}</dd>
                             </div>
                             
                             <div>
-                                <dt class="text-sm font-medium text-gray-500">End Date</dt>
+                                <dt class="text-sm font-medium text-gray-500">Tanggal Selesai</dt>
                                 <dd class="mt-1 text-sm text-gray-900">{{ $rental->end_date->format('F d, Y') }}</dd>
                             </div>
                             
                             <div>
-                                <dt class="text-sm font-medium text-gray-500">Duration</dt>
-                                <dd class="mt-1 text-sm text-gray-900">{{ $rental->total_days }} {{ Str::plural('day', $rental->total_days) }}</dd>
+                                <dt class="text-sm font-medium text-gray-500">Durasi</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ $rental->total_days }} hari</dd>
                             </div>
                             
                             <div>
-                                <dt class="text-sm font-medium text-gray-500">Booking Date</dt>
+                                <dt class="text-sm font-medium text-gray-500">Tanggal Pemesanan</dt>
                                 <dd class="mt-1 text-sm text-gray-900">{{ $rental->created_at->format('F d, Y H:i') }}</dd>
                             </div>
                         </dl>
@@ -199,7 +203,7 @@
                     <!-- Vendor Contact (if vendor product) -->
                     @if($rental->product->vendor)
                         <div class="bg-white shadow-sm rounded-lg p-6">
-                            <h3 class="text-lg font-medium text-gray-900 mb-4">Vendor Contact</h3>
+                            <h3 class="text-lg font-medium text-gray-900 mb-4">Kontak Vendor</h3>
                             
                             <div class="flex items-start space-x-4">
                                 <div class="flex-shrink-0">
@@ -248,7 +252,7 @@
                     <!-- Notes -->
                     @if($rental->notes)
                         <div class="bg-white shadow-sm rounded-lg p-6">
-                            <h3 class="text-lg font-medium text-gray-900 mb-4">Notes & Updates</h3>
+                            <h3 class="text-lg font-medium text-gray-900 mb-4">Catatan & Pembaruan</h3>
                             <div class="bg-gray-50 rounded p-4">
                                 <pre class="text-sm text-gray-700 whitespace-pre-wrap">{{ $rental->notes }}</pre>
                             </div>
@@ -260,21 +264,21 @@
                 <div class="space-y-6">
                     <!-- Pricing Summary -->
                     <div class="bg-white shadow-sm rounded-lg p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Pricing Summary</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Ringkasan Harga</h3>
                         
                         <div class="space-y-3">
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-500">Price per Day</span>
+                                <span class="text-sm text-gray-500">Harga per Hari</span>
                                 <span class="text-sm font-medium text-gray-900">Rp {{ number_format($rental->price_per_day) }}</span>
                             </div>
                             
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-500">Duration</span>
-                                <span class="text-sm font-medium text-gray-900">{{ $rental->total_days }} {{ Str::plural('day', $rental->total_days) }}</span>
+                                <span class="text-sm text-gray-500">Durasi</span>
+                                <span class="text-sm font-medium text-gray-900">{{ $rental->total_days }} hari</span>
                             </div>
                             
                             <div class="flex justify-between border-t border-gray-200 pt-3">
-                                <span class="text-base font-medium text-gray-900">Total Amount</span>
+                                <span class="text-base font-medium text-gray-900">Total Biaya</span>
                                 <span class="text-base font-bold text-gray-900">Rp {{ number_format($rental->total_price) }}</span>
                             </div>
                         </div>
@@ -282,7 +286,7 @@
 
                     <!-- Rental Timeline -->
                     <div class="bg-white shadow-sm rounded-lg p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Rental Timeline</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Timeline Penyewaan</h3>
                         
                         <div class="space-y-4">
                             <div class="flex items-center">
@@ -294,7 +298,7 @@
                                     </div>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Booking Created</p>
+                                    <p class="text-sm font-medium text-gray-900">Pemesanan Dibuat</p>
                                     <p class="text-sm text-gray-500">{{ $rental->created_at->format('M d, Y H:i') }}</p>
                                 </div>
                             </div>
@@ -308,7 +312,7 @@
                                     </div>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Rental Start</p>
+                                    <p class="text-sm font-medium text-gray-900">Mulai Penyewaan</p>
                                     <p class="text-sm text-gray-500">{{ $rental->start_date->format('M d, Y') }}</p>
                                 </div>
                             </div>
@@ -322,7 +326,7 @@
                                     </div>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Rental End</p>
+                                    <p class="text-sm font-medium text-gray-900">Selesai Penyewaan</p>
                                     <p class="text-sm text-gray-500">{{ $rental->end_date->format('M d, Y') }}</p>
                                 </div>
                             </div>
@@ -331,31 +335,31 @@
 
                     <!-- Quick Actions -->
                     <div class="bg-white shadow-sm rounded-lg p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Quick Actions</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Aksi Cepat</h3>
                         
                         <div class="space-y-3">
                             <a href="{{ route('products.show', $rental->product->slug) }}" 
                                class="w-full bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-center block">
-                                View Product Details
+                                Lihat Detail Produk
                             </a>
                             
                             @if($rental->product->vendor)
                                 <a href="mailto:{{ $rental->product->vendor->email }}?subject=Rental {{ $rental->rental_code }}" 
                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-center block">
-                                    Contact Vendor
+                                    Hubungi Vendor
                                 </a>
                                 
                                 @if($rental->product->vendor->phone)
                                     <a href="tel:{{ $rental->product->vendor->phone }}" 
                                        class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-center block">
-                                        Call Vendor
+                                        Telepon Vendor
                                     </a>
                                 @endif
                             @endif
                             
                             <a href="{{ route('dashboard') }}" 
                                class="w-full bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-center block">
-                                Back to Dashboard
+                                Kembali ke Dasbor
                             </a>
                         </div>
                     </div>

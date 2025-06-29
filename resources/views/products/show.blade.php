@@ -74,7 +74,7 @@
                                 <p class="text-3xl font-bold text-primary-600">
                                     Rp {{ number_format($product->price_per_day) }}
                                 </p>
-                                <p class="text-sm text-gray-500">per day</p>
+                                <p class="text-sm text-gray-500">per hari</p>
                             </div>
                             
                             <div>
@@ -83,14 +83,14 @@
                                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                         </svg>
-                                        {{ $product->stock }} available
+                                        {{ $product->stock }} tersedia
                                     </span>
                                 @else
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
                                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
                                         </svg>
-                                        Out of stock
+                                        Stok habis
                                     </span>
                                 @endif
                             </div>
@@ -100,7 +100,7 @@
                     <!-- Description -->
                     @if($product->description)
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Description</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Deskripsi</h3>
                             <p class="text-gray-600 leading-relaxed">{{ $product->description }}</p>
                         </div>
                     @endif
@@ -108,7 +108,7 @@
                     <!-- Specifications -->
                     @if($product->specifications)
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Specifications</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Spesifikasi</h3>
                             <div class="bg-gray-50 rounded-lg p-4">
                                 @php
                                     $specs = is_string($product->specifications) ? json_decode($product->specifications, true) : $product->specifications;
@@ -139,32 +139,32 @@
                                         <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
-                                        Book This Product
+                                        Pesan Produk Ini
                                     </a>
                                     
                                     <p class="text-xs text-gray-500 text-center">
-                                        Secure booking • Flexible rental periods • Professional support
+                                        Pemesanan aman • Periode sewa fleksibel • Dukungan profesional
                                     </p>
                                 </div>
                             @else
                                 <div class="text-center">
                                     <button disabled 
                                             class="w-full bg-gray-400 text-white py-3 px-6 rounded-lg cursor-not-allowed font-medium">
-                                        Currently Unavailable
+                                        Saat Ini Tidak Tersedia
                                     </button>
-                                    <p class="text-sm text-gray-500 mt-2">This product is currently out of stock. Check back later or contact us for availability updates.</p>
+                                    <p class="text-sm text-gray-500 mt-2">Produk ini saat ini stok habis. Periksa kembali nanti atau hubungi kami untuk update ketersediaan.</p>
                                 </div>
                             @endif
                         @else
                             <div class="space-y-4">
                                 <a href="{{ route('login') }}" 
                                    class="w-full bg-primary-600 text-white text-center py-3 px-6 rounded-lg hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 font-medium inline-block">
-                                    Login to Book This Product
+                                    Masuk untuk Pesan Produk Ini
                                 </a>
                                 
                                 <p class="text-center text-sm text-gray-600">
-                                    Don't have an account? 
-                                    <a href="{{ route('register') }}" class="text-primary-600 hover:text-primary-500 font-medium">Sign up here</a>
+                                    Belum punya akun? 
+                                    <a href="{{ route('register') }}" class="text-primary-600 hover:text-primary-500 font-medium">Daftar di sini</a>
                                 </p>
                             </div>
                         @endauth
@@ -172,12 +172,12 @@
 
                     <!-- Additional Info -->
                     <div class="bg-blue-50 rounded-lg p-4">
-                        <h4 class="text-sm font-semibold text-blue-900 mb-2">Rental Information</h4>
+                        <h4 class="text-sm font-semibold text-blue-900 mb-2">Informasi Penyewaan</h4>
                         <ul class="text-sm text-blue-800 space-y-1">
-                            <li>• Minimum rental period: 1 day</li>
-                            <li>• Free delivery within the city</li>
-                            <li>• 24/7 technical support</li>
-                            <li>• Damage protection included</li>
+                            <li>• Periode sewa minimum: 1 hari</li>
+                            <li>• Pengiriman gratis dalam kota</li>
+                            <li>• Dukungan teknis 24/7</li>
+                            <li>• Perlindungan kerusakan termasuk</li>
                         </ul>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
             <!-- Related Products -->
             @if($relatedProducts->count() > 0)
                 <div class="mt-12">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Products</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Produk Terkait</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         @foreach($relatedProducts as $relatedProduct)
                             <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">

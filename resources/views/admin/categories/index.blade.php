@@ -3,11 +3,11 @@
         <!-- Header -->
         <div class="flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Categories</h1>
-                <p class="text-gray-600 mt-1">Manage product categories</p>
+                <h1 class="text-3xl font-bold text-gray-900">Kategori</h1>
+                <p class="text-gray-600 mt-1">Kelola Kategori</p>
             </div>
             <a href="{{ route('admin.categories.create') }}" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                Add New Category
+                Tambah Kategori
             </a>
         </div>
 
@@ -16,11 +16,11 @@
             <form method="GET" action="{{ route('admin.categories.index') }}" class="flex gap-4">
                 <div class="flex-1">
                     <input type="text" name="search" value="{{ request('search') }}" 
-                           placeholder="Search categories..." 
+                           placeholder="Cari kategori..." 
                            class="w-full border-gray-300 rounded-md shadow-sm focus:border-primary-500 focus:ring-primary-500">
                 </div>
                 <button type="submit" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-md font-medium transition-colors">
-                    Search
+                    Cari
                 </button>
             </form>
         </div>
@@ -40,7 +40,7 @@
                             </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900">{{ $category->name }}</h3>
-                                <p class="text-sm text-gray-500">{{ $category->products_count }} products</p>
+                                <p class="text-sm text-gray-500">{{ $category->products_count }} produk</p>
                             </div>
                         </div>
                         <div class="flex space-x-2">
@@ -51,7 +51,7 @@
                                 </svg>
                             </a>
                             <form method="POST" action="{{ route('admin.categories.destroy', $category) }}" 
-                                  class="inline" onsubmit="return confirm('Are you sure you want to delete this category?')">
+                                  class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')">">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-600 hover:text-red-900 p-1">
@@ -70,7 +70,7 @@
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <a href="{{ route('admin.categories.show', $category) }}" 
                            class="text-primary-600 hover:text-primary-900 text-sm font-medium">
-                            View Details →
+                            Lihat Detail →
                         </a>
                     </div>
                 </div>
@@ -80,12 +80,12 @@
                         <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                         </svg>
-                        <h3 class="mt-2 text-sm font-medium text-gray-900">No categories found</h3>
-                        <p class="mt-1 text-sm text-gray-500">Get started by creating a new category.</p>
+                        <h3 class="mt-2 text-sm font-medium text-gray-900">Tidak ada kategori ditemukan</h3>
+                        <p class="mt-1 text-sm text-gray-500">Mulai dengan membuat kategori baru.</p>
                         <div class="mt-6">
                             <a href="{{ route('admin.categories.create') }}" 
                                class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
-                                Add New Category
+                                Tambah Kategori
                             </a>
                         </div>
                     </div>

@@ -13,21 +13,21 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ t('nav.dashboard') }}
+                        Dasbor
                     </x-nav-link>
                     <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
-                        {{ t('nav.products') }}
+                        Produk
                     </x-nav-link>
                     <x-nav-link :href="route('user.rentals')" :active="request()->routeIs('user.rentals')">
-                        {{ t('nav.my_rentals') }}
+                        Penyewaan Saya
                     </x-nav-link>
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
-                <!-- Language Switcher -->
-                <x-language-switcher />
+                <!-- Language Switcher Disabled -->
+                {{-- <x-language-switcher /> --}}
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -43,7 +43,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            Profil
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -53,7 +53,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                Keluar
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -76,7 +76,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                Dasbor
             </x-responsive-nav-link>
         </div>
 
@@ -89,7 +89,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
+                    Profil
                 </x-responsive-nav-link>
 
                 <!-- Language Switcher for Mobile -->
@@ -114,7 +114,7 @@
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ t('nav.logout') }}
                     </x-responsive-nav-link>
                 </form>
             </div>

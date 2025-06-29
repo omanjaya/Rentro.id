@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Products
+                Produk
             </h2>
         </div>
     </x-slot>
@@ -14,21 +14,21 @@
                 <div class="p-6">
                     <form method="GET" action="{{ route('products.index') }}" class="space-y-4 md:space-y-0 md:flex md:items-end md:space-x-4">
                         <div class="flex-1">
-                            <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search Products</label>
+                            <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Cari</label>
                             <input type="text" 
                                    name="search" 
                                    id="search"
                                    value="{{ request('search') }}" 
-                                   placeholder="Search by product name..."
+                                   placeholder="Cari produk..."
                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
                         </div>
                         
                         <div class="md:w-48">
-                            <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                            <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
                             <select name="category" 
                                     id="category"
                                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
-                                <option value="">All Categories</option>
+                                <option value="">Semua Kategori</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
@@ -40,12 +40,12 @@
                         <div class="flex space-x-2">
                             <button type="submit" 
                                     class="bg-primary-600 text-white px-6 py-2 rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                                Search
+                                Cari
                             </button>
                             @if(request()->hasAny(['search', 'category']))
                                 <a href="{{ route('products.index') }}" 
                                    class="bg-gray-200 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                                    Clear
+                                    Bersihkan
                                 </a>
                             @endif
                         </div>
@@ -57,15 +57,15 @@
             @if(request()->hasAny(['search', 'category']))
                 <div class="mb-4">
                     <p class="text-gray-600">
-                        Showing {{ $products->count() }} of {{ $products->total() }} results
+                        Menampilkan {{ $products->count() }} dari {{ $products->total() }} hasil
                         @if(request('search'))
-                            for "<strong>{{ request('search') }}</strong>"
+                            untuk "<strong>{{ request('search') }}</strong>"
                         @endif
                         @if(request('category'))
                             @php
                                 $selectedCategory = $categories->firstWhere('id', request('category'));
                             @endphp
-                            in category "<strong>{{ $selectedCategory->name ?? 'Unknown' }}</strong>"
+                            dalam kategori "<strong>{{ $selectedCategory->name ?? 'Tidak Diketahui' }}</strong>"
                         @endif
                     </p>
                 </div>
@@ -118,17 +118,17 @@
                                         <p class="text-lg font-bold text-primary-600">
                                             Rp {{ number_format($product->price_per_day) }}
                                         </p>
-                                        <p class="text-xs text-gray-500">per day</p>
+                                        <p class="text-xs text-gray-500">per hari</p>
                                     </div>
                                     
                                     <div class="text-right">
                                         @if($product->stock > 0)
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                                {{ $product->stock }} available
+                                                {{ $product->stock }} tersedia
                                             </span>
                                         @else
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                                Out of stock
+                                                Stok habis
                                             </span>
                                         @endif
                                     </div>
@@ -138,20 +138,20 @@
                                 <div class="flex space-x-2">
                                     <a href="{{ route('products.show', $product->slug) }}" 
                                        class="flex-1 bg-primary-600 text-white text-center py-2 px-4 rounded-md hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                                        View Details
+                                        Lihat Detail
                                     </a>
                                     
                                     @auth
                                         @if($product->stock > 0)
                                             <a href="{{ route('booking.show', $product->slug) }}" 
                                                class="flex-1 bg-green-600 text-white text-center py-2 px-4 rounded-md hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                                                Rent Now
+                                                Sewa Sekarang
                                             </a>
                                         @endif
                                     @else
                                         <a href="{{ route('login') }}" 
                                            class="flex-1 bg-gray-600 text-white text-center py-2 px-4 rounded-md hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                                            Login to Rent
+                                            Masuk untuk Sewa
                                         </a>
                                     @endauth
                                 </div>
@@ -171,19 +171,19 @@
                         <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.5-1.01-6-2.709M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
-                        <h3 class="mt-2 text-sm font-medium text-gray-900">No products found</h3>
+                        <h3 class="mt-2 text-sm font-medium text-gray-900">Tidak ada produk ditemukan</h3>
                         <p class="mt-1 text-sm text-gray-500">
                             @if(request()->hasAny(['search', 'category']))
-                                Try adjusting your search criteria or browse all products.
+                                Coba sesuaikan kriteria pencarian atau jelajahi semua produk.
                             @else
-                                No products are currently available.
+                                Tidak ada produk yang tersedia saat ini.
                             @endif
                         </p>
                         @if(request()->hasAny(['search', 'category']))
                             <div class="mt-6">
                                 <a href="{{ route('products.index') }}" 
                                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                                    Browse All Products
+                                    Jelajahi Semua Produk
                                 </a>
                             </div>
                         @endif
@@ -195,7 +195,7 @@
 
     @push('scripts')
     <script>
-        // Auto-submit form when category changes (optional UX enhancement)
+        // Auto-submit form saat kategori berubah (peningkatan UX)
         document.getElementById('category').addEventListener('change', function() {
             if (this.value !== '' || document.getElementById('search').value !== '') {
                 this.form.submit();

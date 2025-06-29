@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('My Dashboard') }}
+            Dasbor Saya
         </h2>
     </x-slot>
 
@@ -11,8 +11,8 @@
                 <!-- Welcome Message -->
                 <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <h3 class="text-lg font-semibold mb-2">Welcome back, {{ Auth::user()->name }}!</h3>
-                        <p class="text-gray-600">Manage your rentals and explore our products.</p>
+                        <h3 class="text-lg font-semibold mb-2">Selamat datang kembali, {{ Auth::user()->name }}!</h3>
+                        <p class="text-gray-600">Kelola penyewaan Anda dan jelajahi produk kami.</p>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Total Rentals</dt>
+                                        <dt class="text-sm font-medium text-gray-500 truncate">Total Penyewaan</dt>
                                         <dd class="text-2xl font-bold text-gray-900">{{ $stats['total_rentals'] }}</dd>
                                     </dl>
                                 </div>
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Active Rentals</dt>
+                                        <dt class="text-sm font-medium text-gray-500 truncate">Penyewaan Aktif</dt>
                                         <dd class="text-2xl font-bold text-green-600">{{ $stats['active_rentals'] }}</dd>
                                     </dl>
                                 </div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Pending</dt>
+                                        <dt class="text-sm font-medium text-gray-500 truncate">Menunggu</dt>
                                         <dd class="text-2xl font-bold text-yellow-600">{{ $stats['pending_rentals'] }}</dd>
                                     </dl>
                                 </div>
@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
-                                        <dt class="text-sm font-medium text-gray-500 truncate">Completed</dt>
+                                        <dt class="text-sm font-medium text-gray-500 truncate">Selesai</dt>
                                         <dd class="text-2xl font-bold text-gray-600">{{ $stats['completed_rentals'] }}</dd>
                                     </dl>
                                 </div>
@@ -104,7 +104,7 @@
                     @if($activeRentals->count() > 0)
                     <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                         <div class="p-6">
-                            <h3 class="text-lg font-medium text-gray-900 mb-4">Currently Renting</h3>
+                            <h3 class="text-lg font-medium text-gray-900 mb-4">Sedang Menyewa</h3>
                             <div class="space-y-4">
                                 @foreach($activeRentals as $rental)
                                     <div class="border border-gray-200 rounded-lg p-4">
@@ -117,13 +117,13 @@
                                                 </p>
                                             </div>
                                             <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                                                Active
+                                                Aktif
                                             </span>
                                         </div>
                                         <div class="mt-3 flex justify-between items-center">
                                             <span class="text-sm font-medium text-gray-900">Rp {{ number_format($rental->total_price) }}</span>
                                             <a href="{{ route('booking.rental', $rental) }}" class="text-sm text-primary-600 hover:text-primary-500">
-                                                View Details →
+                                                Lihat Detail →
                                             </a>
                                         </div>
                                     </div>
@@ -137,9 +137,9 @@
                     <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-4">
-                                <h3 class="text-lg font-medium text-gray-900">Recent Rentals</h3>
+                                <h3 class="text-lg font-medium text-gray-900">Penyewaan Terbaru</h3>
                                 <a href="{{ route('user.rentals') }}" class="text-sm text-primary-600 hover:text-primary-500">
-                                    View All →
+                                    Lihat Semua →
                                 </a>
                             </div>
                             
@@ -159,7 +159,11 @@
                                                     @elseif($rental->status === 'completed') bg-gray-100 text-gray-800
                                                     @else bg-red-100 text-red-800
                                                     @endif">
-                                                    {{ ucfirst($rental->status) }}
+                                                    @if($rental->status === 'pending') Menunggu
+                                                    @elseif($rental->status === 'active') Aktif
+                                                    @elseif($rental->status === 'completed') Selesai
+                                                    @else Dibatalkan
+                                                    @endif
                                                 </span>
                                                 <p class="text-sm text-gray-600 mt-1">Rp {{ number_format($rental->total_price) }}</p>
                                             </div>
@@ -171,9 +175,9 @@
                                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                                     </svg>
-                                    <p class="mt-2 text-sm text-gray-500">No rentals yet</p>
+                                    <p class="mt-2 text-sm text-gray-500">Belum ada penyewaan</p>
                                     <a href="{{ route('products.index') }}" class="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-primary-600 bg-primary-100 hover:bg-primary-200">
-                                        Browse Products
+                                        Jelajahi Produk
                                     </a>
                                 </div>
                             @endif
@@ -184,7 +188,7 @@
                 <!-- Quick Actions -->
                 <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                     <div class="p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Quick Actions</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Aksi Cepat</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <a href="{{ route('products.index') }}" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
                                 <div class="flex-shrink-0">
@@ -193,8 +197,8 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Browse Products</p>
-                                    <p class="text-sm text-gray-500">Find equipment to rent</p>
+                                    <p class="text-sm font-medium text-gray-900">Jelajahi Produk</p>
+                                    <p class="text-sm text-gray-500">Temukan peralatan untuk disewa</p>
                                 </div>
                             </a>
 
@@ -205,8 +209,8 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">My Rentals</p>
-                                    <p class="text-sm text-gray-500">View rental history</p>
+                                    <p class="text-sm font-medium text-gray-900">Penyewaan Saya</p>
+                                    <p class="text-sm text-gray-500">Lihat riwayat penyewaan</p>
                                 </div>
                             </a>
 
@@ -217,8 +221,8 @@
                                     </svg>
                                 </div>
                                 <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Edit Profile</p>
-                                    <p class="text-sm text-gray-500">Update account details</p>
+                                    <p class="text-sm font-medium text-gray-900">Edit Profil</p>
+                                    <p class="text-sm text-gray-500">Perbarui detail akun</p>
                                 </div>
                             </a>
                         </div>

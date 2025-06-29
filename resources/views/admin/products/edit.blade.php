@@ -3,11 +3,11 @@
         <!-- Header -->
         <div class="flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Edit Product</h1>
-                <p class="text-gray-600 mt-1">Update product information</p>
+                <h1 class="text-3xl font-bold text-gray-900">Edit Produk</h1>
+                <p class="text-gray-600 mt-1">Perbarui informasi produk</p>
             </div>
             <a href="{{ route('admin.products.index') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                Back to Products
+                Kembali ke Produk
             </a>
         </div>
 
@@ -21,12 +21,12 @@
                 <div class="lg:col-span-2 space-y-6">
                     <!-- Basic Information -->
                     <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Basic Information</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Informasi Dasar</h3>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <!-- Product Name -->
                             <div class="md:col-span-2">
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Product Name *</label>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Produk *</label>
                                 <input type="text" name="name" id="name" value="{{ old('name', $product->name) }}" required
                                        class="w-full border-gray-300 rounded-md shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('name') border-red-500 @enderror">
                                 @error('name')

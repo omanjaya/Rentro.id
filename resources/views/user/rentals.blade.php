@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('My Rentals') }}
+            Penyewaan Saya
         </h2>
     </x-slot>
 
@@ -12,12 +12,12 @@
                 <div class="p-6">
                     <form method="GET" action="{{ route('user.rentals') }}" class="space-y-4 md:space-y-0 md:flex md:items-end md:space-x-4">
                         <div class="flex-1">
-                            <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search Rentals</label>
+                            <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Cari Penyewaan</label>
                             <input type="text" 
                                    name="search" 
                                    id="search"
                                    value="{{ request('search') }}" 
-                                   placeholder="Search by product name or rental code..."
+                                   placeholder="Cari berdasarkan nama produk atau kode sewa..."
                                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
                         </div>
                         
@@ -26,12 +26,12 @@
                             <select name="status" 
                                     id="status"
                                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
-                                <option value="">All Status</option>
-                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Approved</option>
-                                <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
-                                <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                <option value="">Semua Status</option>
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu</option>
+                                <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>Disetujui</option>
+                                <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
+                                <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Selesai</option>
+                                <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Dibatalkan</option>
                             </select>
                         </div>
                         
@@ -43,7 +43,7 @@
                             @if(request()->hasAny(['search', 'status']))
                                 <a href="{{ route('user.rentals') }}" 
                                    class="bg-gray-200 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                                    Clear
+                                    Bersihkan
                                 </a>
                             @endif
                         </div>
@@ -91,32 +91,37 @@
                                                 @elseif($rental->status === 'completed') bg-gray-100 text-gray-800
                                                 @else bg-red-100 text-red-800
                                                 @endif">
-                                                {{ ucfirst($rental->status) }}
+                                                @if($rental->status === 'pending') Menunggu
+                                                @elseif($rental->status === 'approved') Disetujui
+                                                @elseif($rental->status === 'active') Aktif
+                                                @elseif($rental->status === 'completed') Selesai
+                                                @else Dibatalkan
+                                                @endif
                                             </span>
                                         </div>
 
                                         <div class="grid grid-cols-2 gap-4 text-sm">
                                             <div>
-                                                <span class="font-medium text-gray-600">Rental Code:</span>
+                                                <span class="font-medium text-gray-600">Kode Sewa:</span>
                                                 <p class="text-gray-900 font-mono">{{ $rental->rental_code }}</p>
                                             </div>
                                             <div>
-                                                <span class="font-medium text-gray-600">Duration:</span>
-                                                <p class="text-gray-900">{{ $rental->total_days }} {{ Str::plural('day', $rental->total_days) }}</p>
+                                                <span class="font-medium text-gray-600">Durasi:</span>
+                                                <p class="text-gray-900">{{ $rental->total_days }} hari</p>
                                             </div>
                                             <div>
-                                                <span class="font-medium text-gray-600">Start Date:</span>
+                                                <span class="font-medium text-gray-600">Tanggal Mulai:</span>
                                                 <p class="text-gray-900">{{ $rental->start_date->format('M d, Y') }}</p>
                                             </div>
                                             <div>
-                                                <span class="font-medium text-gray-600">End Date:</span>
+                                                <span class="font-medium text-gray-600">Tanggal Selesai:</span>
                                                 <p class="text-gray-900">{{ $rental->end_date->format('M d, Y') }}</p>
                                             </div>
                                         </div>
 
                                         @if($rental->notes)
                                             <div>
-                                                <span class="font-medium text-gray-600 text-sm">Notes:</span>
+                                                <span class="font-medium text-gray-600 text-sm">Catatan:</span>
                                                 <p class="text-gray-700 text-sm">{{ $rental->notes }}</p>
                                             </div>
                                         @endif
@@ -125,35 +130,35 @@
                                     <!-- Pricing & Actions -->
                                     <div class="lg:col-span-1 space-y-4">
                                         <div class="text-right">
-                                            <p class="text-sm text-gray-600">Total Cost</p>
+                                            <p class="text-sm text-gray-600">Total Biaya</p>
                                             <p class="text-2xl font-bold text-primary-600">
                                                 Rp {{ number_format($rental->total_price) }}
                                             </p>
                                             <p class="text-xs text-gray-500">
-                                                (Rp {{ number_format($rental->price_per_day) }}/day)
+                                                (Rp {{ number_format($rental->price_per_day) }}/hari)
                                             </p>
                                         </div>
 
                                         <div class="space-y-2">
                                             <a href="{{ route('booking.rental', $rental) }}" 
                                                class="w-full bg-primary-600 text-white text-center py-2 px-4 rounded-md hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 text-sm inline-block">
-                                                View Details
+                                                Lihat Detail
                                             </a>
 
                                             @if($rental->status === 'pending')
                                                 <form method="POST" action="{{ route('booking.cancel', $rental) }}" class="w-full">
                                                     @csrf
                                                     <button type="submit" 
-                                                            onclick="return confirm('Are you sure you want to cancel this rental?')"
+                                                            onclick="return confirm('Apakah Anda yakin ingin membatalkan penyewaan ini?')"
                                                             class="w-full bg-red-100 text-red-700 text-center py-2 px-4 rounded-md hover:bg-red-200 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-sm">
-                                                        Cancel Rental
+                                                        Batalkan Penyewaan
                                                     </button>
                                                 </form>
                                             @endif
                                         </div>
 
                                         <div class="text-xs text-gray-500 text-right">
-                                            <p>Booked: {{ $rental->created_at->diffForHumans() }}</p>
+                                            <p>Dipesan: {{ $rental->created_at->diffForHumans() }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -173,24 +178,24 @@
                         <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                         </svg>
-                        <h3 class="mt-2 text-sm font-medium text-gray-900">No rentals found</h3>
+                        <h3 class="mt-2 text-sm font-medium text-gray-900">Tidak ada penyewaan ditemukan</h3>
                         <p class="mt-1 text-sm text-gray-500">
                             @if(request()->hasAny(['search', 'status']))
-                                No rentals match your current filters. Try adjusting your search criteria.
+                                Tidak ada penyewaan yang sesuai dengan filter Anda. Coba sesuaikan kriteria pencarian.
                             @else
-                                You haven't made any rentals yet. Start browsing our products to make your first rental.
+                                Anda belum melakukan penyewaan. Mulai jelajahi produk kami untuk melakukan penyewaan pertama.
                             @endif
                         </p>
                         <div class="mt-6">
                             @if(request()->hasAny(['search', 'status']))
                                 <a href="{{ route('user.rentals') }}" 
                                    class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 mr-3">
-                                    Clear Filters
+                                    Hapus Filter
                                 </a>
                             @endif
                             <a href="{{ route('products.index') }}" 
                                class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                                Browse Products
+                                Jelajahi Semua Produk
                             </a>
                         </div>
                     </div>

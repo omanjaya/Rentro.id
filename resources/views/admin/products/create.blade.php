@@ -3,18 +3,18 @@
         <!-- Header -->
         <div class="flex justify-between items-center">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Create Product</h1>
-                <p class="text-gray-600 mt-1">Add a new product to your rental inventory</p>
+                <h1 class="text-3xl font-bold text-gray-900">Buat Produk</h1>
+                <p class="text-gray-600 mt-1">Tambahkan produk baru ke inventaris penyewaan Anda</p>
             </div>
             <a href="{{ route('admin.products.index') }}" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                Back to Products
+                Kembali ke Produk
             </a>
         </div>
 
         <!-- Success/Error Messages -->
         @if(session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-                <strong class="font-bold">Success!</strong>
+                <strong class="font-bold">Berhasil!</strong>
                 <span class="block sm:inline">{{ session('success') }}</span>
             </div>
         @endif
@@ -28,7 +28,7 @@
 
         @if($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-                <strong class="font-bold">Please fix the following errors:</strong>
+                <strong class="font-bold">Silakan perbaiki kesalahan berikut:</strong>
                 <ul class="mt-2 list-disc list-inside">
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -55,12 +55,12 @@
                 <div class="lg:col-span-2 space-y-6">
                     <!-- Basic Information -->
                     <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Basic Information</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Informasi Dasar</h3>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <!-- Product Name -->
                             <div class="md:col-span-2">
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Product Name *</label>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Produk *</label>
                                 <input type="text" name="name" id="name" value="{{ old('name') }}" required
                                        class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('name') border-red-500 @enderror">
                                 @error('name')
@@ -70,10 +70,10 @@
 
                             <!-- Category -->
                             <div>
-                                <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Category *</label>
+                                <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Kategori *</label>
                                 <select name="category_id" id="category_id" required
                                         class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('category_id') border-red-500 @enderror">
-                                    <option value="">Select Category</option>
+                                    <option value="">Pilih Kategori</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                             {{ $category->name }}
@@ -90,8 +90,8 @@
                                 <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status *</label>
                                 <select name="status" id="status" required
                                         class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('status') border-red-500 @enderror">
-                                    <option value="active" {{ old('status', 'active') === 'active' ? 'selected' : '' }}>Active</option>
-                                    <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                    <option value="active" {{ old('status', 'active') === 'active' ? 'selected' : '' }}>Aktif</option>
+                                    <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
                                 </select>
                                 @error('status')
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -100,7 +100,7 @@
 
                             <!-- Price -->
                             <div>
-                                <label for="price_per_day" class="block text-sm font-medium text-gray-700 mb-1">Price per Day (Rp) *</label>
+                                <label for="price_per_day" class="block text-sm font-medium text-gray-700 mb-1">Harga per Hari (Rp) *</label>
                                 <input type="number" name="price_per_day" id="price_per_day" value="{{ old('price_per_day') }}" 
                                        min="0" step="1000" required
                                        class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('price_per_day') border-red-500 @enderror">
@@ -111,7 +111,7 @@
 
                             <!-- Stock -->
                             <div>
-                                <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">Stock Quantity *</label>
+                                <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">Jumlah Stok *</label>
                                 <input type="number" name="stock" id="stock" value="{{ old('stock') }}" 
                                        min="0" required
                                        class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('stock') border-red-500 @enderror">
@@ -122,7 +122,7 @@
 
                             <!-- Description -->
                             <div class="md:col-span-2">
-                                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
                                 <textarea name="description" id="description" rows="4"
                                           class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
                                 @error('description')
@@ -134,22 +134,22 @@
 
                     <!-- Specifications -->
                     <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Specifications</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Spesifikasi</h3>
                         
                         <div id="specifications-container" class="space-y-3">
                             <div class="flex gap-3 specification-row">
-                                <input type="text" name="specifications[0][key]" placeholder="Specification name (e.g., Processor)" 
+                                <input type="text" name="specifications[0][key]" placeholder="Nama spesifikasi (misal: Prosesor)" 
                                        class="flex-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                <input type="text" name="specifications[0][value]" placeholder="Specification value (e.g., Intel i7)" 
+                                <input type="text" name="specifications[0][value]" placeholder="Nilai spesifikasi (misal: Intel i7)" 
                                        class="flex-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                 <button type="button" onclick="removeSpecification(this)" class="px-3 py-2 text-red-600 hover:text-red-800 bg-red-50 rounded-md">
-                                    Remove
+                                    Hapus
                                 </button>
                             </div>
                         </div>
                         
                         <button type="button" onclick="addSpecification()" class="mt-3 text-blue-600 hover:text-blue-800 text-sm font-medium bg-blue-50 px-3 py-1 rounded">
-                            + Add Specification
+                            + Tambah Spesifikasi
                         </button>
                     </div>
                 </div>
@@ -158,25 +158,25 @@
                 <div class="space-y-6">
                     <!-- Main Image -->
                     <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Main Image</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Gambar Utama</h3>
                         
                         <div class="space-y-3">
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
                                 <input type="file" name="image" id="image" accept="image/*" class="hidden" onchange="previewMainImage(this)">
                                 <div id="main-image-preview" class="hidden">
                                     <img id="main-image-preview-img" class="mx-auto h-32 w-32 object-cover rounded-lg shadow">
-                                    <button type="button" onclick="removeMainImage()" class="mt-2 text-red-600 hover:text-red-800 text-sm bg-red-50 px-2 py-1 rounded">Remove</button>
+                                    <button type="button" onclick="removeMainImage()" class="mt-2 text-red-600 hover:text-red-800 text-sm bg-red-50 px-2 py-1 rounded">Hapus</button>
                                 </div>
                                 <div id="main-image-placeholder">
                                     <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                    <p class="mt-2 text-sm text-gray-600">Click to upload main image</p>
+                                    <p class="mt-2 text-sm text-gray-600">Klik untuk upload gambar utama</p>
                                     <p class="text-xs text-gray-500">PNG, JPG, GIF up to 2MB</p>
                                 </div>
                             </div>
                             <label for="image" class="cursor-pointer block w-full text-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                Choose Main Image
+                                Pilih Gambar Utama
                             </label>
                         </div>
                         @error('image')
@@ -186,7 +186,7 @@
 
                     <!-- Gallery Images -->
                     <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="text-lg font-medium text-gray-900 mb-4">Gallery Images</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Galeri Gambar</h3>
                         
                         <div class="space-y-3">
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
@@ -197,12 +197,12 @@
                                     <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                         <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                    <p class="mt-2 text-sm text-gray-600">Click to upload gallery images</p>
-                                    <p class="text-xs text-gray-500">Multiple images, PNG, JPG, GIF up to 2MB each</p>
+                                    <p class="mt-2 text-sm text-gray-600">Klik untuk upload gambar galeri</p>
+                                    <p class="text-xs text-gray-500">Beberapa gambar, PNG, JPG, GIF hingga 2MB per gambar</p>
                                 </div>
                             </div>
                             <label for="gallery" class="cursor-pointer block w-full text-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                                Choose Gallery Images
+                                Pilih Gambar Galeri
                             </label>
                         </div>
                         @error('gallery.*')
@@ -213,10 +213,10 @@
                     <!-- Submit Button -->
                     <div class="bg-white rounded-lg shadow-sm p-6">
                         <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                            🚀 Create Product
+                            🚀 Buat Produk
                         </button>
                         <a href="{{ route('admin.products.index') }}" class="mt-3 block w-full text-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                            Cancel
+                            Batal
                         </a>
                     </div>
                 </div>

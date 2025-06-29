@@ -3,8 +3,8 @@
         <!-- Header -->
         <div class="bg-white overflow-hidden shadow-sm rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <h1 class="text-3xl font-bold text-gray-900">{{ t('admin.dashboard') }}</h1>
-                <p class="text-gray-600 mt-1">{{ t('messages.welcome_back', ['name' => Auth::user()->name]) }}</p>
+                <h1 class="text-3xl font-bold text-gray-900">Dasbor Admin</h1>
+                <p class="text-gray-600 mt-1">Selamat datang kembali, {{ Auth::user()->name }}!</p>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.total_products') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Produk</dt>
                                 <dd class="text-3xl font-bold text-gray-900">{{ number_format($stats['total_products']) }}</dd>
                             </dl>
                         </div>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.total_categories') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Kategori</dt>
                                 <dd class="text-3xl font-bold text-gray-900">{{ number_format($stats['total_categories']) }}</dd>
                             </dl>
                         </div>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.total_customers') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Pelanggan</dt>
                                 <dd class="text-3xl font-bold text-gray-900">{{ number_format($stats['total_customers']) }}</dd>
                             </dl>
                         </div>
@@ -86,7 +86,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.total_rentals') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Penyewaan</dt>
                                 <dd class="text-3xl font-bold text-gray-900">{{ number_format($stats['total_rentals']) }}</dd>
                             </dl>
                         </div>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.active_rentals') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Penyewaan Aktif</dt>
                                 <dd class="text-2xl font-bold text-blue-600">{{ number_format($stats['active_rentals']) }}</dd>
                             </dl>
                         </div>
@@ -131,7 +131,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.pending_rentals') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Penyewaan Menunggu</dt>
                                 <dd class="text-2xl font-bold text-yellow-600">{{ number_format($stats['pending_rentals']) }}</dd>
                             </dl>
                         </div>
@@ -152,7 +152,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.completed_rentals') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Penyewaan Selesai</dt>
                                 <dd class="text-2xl font-bold text-green-600">{{ number_format($stats['completed_rentals']) }}</dd>
                             </dl>
                         </div>
@@ -176,7 +176,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.total_admins') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Admin</dt>
                                 <dd class="text-2xl font-bold text-purple-600">{{ number_format($stats['total_admins']) }}</dd>
                             </dl>
                         </div>
@@ -197,7 +197,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.total_users') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Pengguna</dt>
                                 <dd class="text-2xl font-bold text-indigo-600">{{ number_format($stats['total_users']) }}</dd>
                             </dl>
                         </div>
@@ -218,7 +218,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.new_users_this_month') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Pengguna Baru Bulan Ini</dt>
                                 <dd class="text-2xl font-bold text-teal-600">{{ number_format($stats['new_users_this_month']) }}</dd>
                             </dl>
                         </div>
@@ -242,7 +242,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.revenue_today') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Pendapatan Hari Ini</dt>
                                 <dd class="text-2xl font-bold text-green-600">Rp {{ number_format($stats['revenue_today']) }}</dd>
                             </dl>
                         </div>
@@ -263,7 +263,7 @@
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">{{ t('admin.revenue_this_month') }}</dt>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Pendapatan Bulan Ini</dt>
                                 <dd class="text-2xl font-bold text-green-700">Rp {{ number_format($stats['revenue_this_month']) }}</dd>
                             </dl>
                         </div>
@@ -276,7 +276,7 @@
             <!-- Recent Rentals -->
             <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">{{ t('admin.recent_rentals') }}</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Penyewaan Terbaru</h3>
                     <div class="space-y-4">
                         @forelse($recentRentals as $rental)
                             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
@@ -292,18 +292,23 @@
                                         @elseif($rental->status === 'completed') bg-green-100 text-green-800
                                         @else bg-red-100 text-red-800
                                         @endif">
-                                        {{ t('rentals.statuses.' . $rental->status) }}
+                                        @if($rental->status === 'pending') Menunggu
+                                        @elseif($rental->status === 'approved') Disetujui
+                                        @elseif($rental->status === 'active') Aktif
+                                        @elseif($rental->status === 'completed') Selesai
+                                        @else Dibatalkan
+                                        @endif
                                     </span>
                                     <p class="text-sm font-medium text-gray-900 mt-1">Rp {{ number_format($rental->total_price) }}</p>
                                 </div>
                             </div>
                         @empty
-                            <p class="text-gray-500 text-center py-4">{{ t('rentals.no_rentals') }}</p>
+                            <p class="text-gray-500 text-center py-4">Belum ada penyewaan</p>
                         @endforelse
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('admin.rentals.index') }}" class="text-primary-600 hover:text-primary-500 text-sm font-medium">
-                            {{ t('admin.view_all') }} →
+                            Lihat Semua →
                         </a>
                     </div>
                 </div>
@@ -312,7 +317,7 @@
             <!-- Recent Users -->
             <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">{{ t('admin.recent_users') }}</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Pengguna Terbaru</h3>
                     <div class="space-y-4">
                         @forelse($recentUsers as $user)
                             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
@@ -343,17 +348,21 @@
                                         @elseif($user->user_type === 'business') bg-yellow-100 text-yellow-800
                                         @else bg-blue-100 text-blue-800
                                         @endif">
-                                        {{ t('user.types.' . $user->user_type) }}
+                                        @if($user->user_type === 'admin') Admin
+                                        @elseif($user->user_type === 'vendor') Vendor
+                                        @elseif($user->user_type === 'business') Bisnis
+                                        @else Individu
+                                        @endif
                                     </span>
                                 </div>
                             </div>
                         @empty
-                            <p class="text-gray-500 text-center py-4">{{ t('messages.no_results') }}</p>
+                            <p class="text-gray-500 text-center py-4">Tidak ada hasil ditemukan</p>
                         @endforelse
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('admin.users.index') }}" class="text-primary-600 hover:text-primary-500 text-sm font-medium">
-                            {{ t('admin.view_all') }} →
+                            Lihat Semua →
                         </a>
                     </div>
                 </div>
@@ -362,7 +371,7 @@
             <!-- Top Products -->
             <div class="bg-white overflow-hidden shadow-sm rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">{{ t('admin.top_products') }}</h3>
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Produk Teratas</h3>
                     <div class="space-y-4">
                         @forelse($topProducts as $product)
                             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
@@ -371,17 +380,17 @@
                                     <p class="text-sm text-gray-500">{{ $product->category->name }}</p>
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-sm font-medium text-gray-900">{{ $product->rentals_count }} {{ t('rentals.title') }}</p>
-                                    <p class="text-sm text-gray-500">Rp {{ number_format($product->price_per_day) }}/{{ t('products.per_day') }}</p>
+                                    <p class="text-sm font-medium text-gray-900">{{ $product->rentals_count }} Penyewaan</p>
+                                    <p class="text-sm text-gray-500">Rp {{ number_format($product->price_per_day) }}/hari</p>
                                 </div>
                             </div>
                         @empty
-                            <p class="text-gray-500 text-center py-4">{{ t('products.no_products') }}</p>
+                            <p class="text-gray-500 text-center py-4">Tidak ada produk ditemukan</p>
                         @endforelse
                     </div>
                     <div class="mt-4">
                         <a href="{{ route('admin.products.index') }}" class="text-primary-600 hover:text-primary-500 text-sm font-medium">
-                            {{ t('admin.view_all') }} →
+                            Lihat Semua →
                         </a>
                     </div>
                 </div>

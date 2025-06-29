@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ config('app.name', 'Rentro.id') }} - Electronic Equipment Rental</title>
+        <title>{{ config('app.name', 'Rentro.id') }} - Penyewaan Peralatan Elektronik</title>
         
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -27,20 +27,20 @@
                     </div>
                     
                     <div class="flex items-center space-x-4">
-                        <!-- Language Switcher -->
-                        <x-language-switcher />
+                        <!-- Language Switcher Disabled -->
+                        {{-- <x-language-switcher /> --}}
                         
-                        <a href="{{ route('products.index') }}" class="text-gray-600 hover:text-gray-900">{{ t('nav.products') }}</a>
+                        <a href="{{ route('products.index') }}" class="text-gray-600 hover:text-gray-900">Produk</a>
                         
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="text-gray-600 hover:text-gray-900">{{ t('nav.dashboard') }}</a>
+                            <a href="{{ url('/dashboard') }}" class="text-gray-600 hover:text-gray-900">Dasbor</a>
                             <form method="POST" action="{{ route('logout') }}" class="inline">
                                 @csrf
-                                <button type="submit" class="text-gray-600 hover:text-gray-900">{{ t('nav.logout') }}</button>
+                                <button type="submit" class="text-gray-600 hover:text-gray-900">Keluar</button>
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">{{ t('nav.login') }}</a>
-                            <a href="{{ route('register') }}" class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700">{{ t('nav.register') }}</a>
+                            <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">Masuk</a>
+                            <a href="{{ route('register') }}" class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700">Daftar</a>
                         @endauth
                     </div>
                 </div>
@@ -54,22 +54,22 @@
                     <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                         <div class="sm:text-center lg:text-left">
                             <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
-                                <span class="block">Rent Electronics</span>
-                                <span class="block text-primary-200">Made Simple</span>
+                                <span class="block">Sewa Elektronik</span>
+                                <span class="block text-primary-200">Menjadi Mudah</span>
                             </h1>
                             <p class="mt-3 text-base text-primary-100 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                Get access to the latest electronic equipment without the hefty purchase price. From cameras to laptops, we have everything you need for your projects.
+                                Dapatkan akses ke peralatan elektronik terbaru tanpa harus membeli dengan harga mahal. Dari kamera hingga laptop, kami memiliki semua yang Anda butuhkan untuk proyek Anda.
                             </p>
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                                 <div class="rounded-md shadow">
                                     <a href="{{ route('products.index') }}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
-                                        Browse Products
+                                        Jelajahi Produk
                                     </a>
                                 </div>
                                 @guest
                                 <div class="mt-3 sm:mt-0 sm:ml-3">
                                     <a href="{{ route('register') }}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-500 hover:bg-primary-600 md:py-4 md:text-lg md:px-10">
-                                        Get Started
+                                        Mulai Sekarang
                                     </a>
                                 </div>
                                 @endguest
@@ -84,7 +84,7 @@
                         <svg class="mx-auto h-24 w-24 text-primary-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
-                        <p class="mt-2 text-sm font-medium">Professional Equipment</p>
+                        <p class="mt-2 text-sm font-medium">Peralatan Profesional</p>
                     </div>
                 </div>
             </div>
@@ -96,13 +96,13 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
                     <h2 class="text-3xl font-extrabold text-gray-900">
-                        Popular Categories
+                        Kategori Populer
                     </h2>
                     <p class="mt-4 text-lg text-gray-500">
-                        Find the perfect equipment for your needs
+                        Temukan peralatan yang sempurna untuk kebutuhan Anda
                     </p>
                     <p class="mt-2 text-sm text-gray-400">
-                        Click on any category to browse available products
+                        Klik kategori manapun untuk melihat produk yang tersedia
                     </p>
                 </div>
                 
@@ -122,7 +122,7 @@
                                 </div>
                             @endif
                             <h3 class="text-sm font-medium text-gray-900 group-hover:text-primary-600">{{ $category->name }}</h3>
-                            <p class="text-xs text-gray-500 mt-1">{{ $category->products_count }} {{ Str::plural('item', $category->products_count) }}</p>
+                            <p class="text-xs text-gray-500 mt-1">{{ $category->products_count }} item</p>
                         </div>
                     </a>
                     @endforeach
@@ -137,10 +137,10 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
                     <h2 class="text-3xl font-extrabold text-gray-900">
-                        Featured Products
+                        Produk Unggulan
                     </h2>
                     <p class="mt-4 text-lg text-gray-500">
-                        Our most popular rental items
+                        Item penyewaan paling populer kami
                     </p>
                 </div>
                 
@@ -171,21 +171,21 @@
                             <p class="text-sm text-gray-500">{{ $product->category->name }}</p>
                             <div class="mt-2 flex items-center justify-between">
                                 <p class="text-lg font-bold text-primary-600">
-                                    Rp {{ number_format($product->price_per_day) }}/day
+                                    Rp {{ number_format($product->price_per_day) }}/hari
                                 </p>
                                 @if($product->stock > 0)
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        Available
+                                        Tersedia
                                     </span>
                                 @else
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                        Out of Stock
+                                        Stok Habis
                                     </span>
                                 @endif
                             </div>
                             <div class="mt-3">
                                 <a href="{{ route('products.show', $product->slug) }}" class="w-full bg-primary-600 text-white text-center py-2 px-4 rounded-lg hover:bg-primary-700 transition-colors inline-block">
-                                    View Details
+                                    Lihat Detail
                                 </a>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                 
                 <div class="mt-8 text-center">
                     <a href="{{ route('products.index') }}" class="inline-flex items-center px-6 py-3 border border-primary-300 text-base font-medium rounded-lg text-primary-700 bg-white hover:bg-primary-50">
-                        View All Products
+                        Lihat Semua Produk
                         <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
                         </svg>
@@ -214,26 +214,26 @@
                             <span class="text-2xl font-bold text-white">Rentro.id</span>
                         </div>
                         <p class="mt-4 text-gray-300 text-sm">
-                            Professional electronic equipment rental service. Get access to the latest technology without the commitment of purchase.
+                            Layanan penyewaan peralatan elektronik profesional. Dapatkan akses ke teknologi terbaru tanpa komitmen pembelian.
                         </p>
                     </div>
                     
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Quick Links</h3>
+                        <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Tautan Cepat</h3>
                         <div class="mt-4 space-y-2">
-                            <a href="{{ route('products.index') }}" class="text-gray-300 hover:text-white block text-sm">Browse Products</a>
+                            <a href="{{ route('products.index') }}" class="text-gray-300 hover:text-white block text-sm">Jelajahi Produk</a>
                             @auth
-                                <a href="{{ route('dashboard') }}" class="text-gray-300 hover:text-white block text-sm">My Dashboard</a>
-                                <a href="{{ route('user.rentals') }}" class="text-gray-300 hover:text-white block text-sm">My Rentals</a>
+                                <a href="{{ route('dashboard') }}" class="text-gray-300 hover:text-white block text-sm">Dasbor Saya</a>
+                                <a href="{{ route('user.rentals') }}" class="text-gray-300 hover:text-white block text-sm">Penyewaan Saya</a>
                             @else
-                                <a href="{{ route('login') }}" class="text-gray-300 hover:text-white block text-sm">Login</a>
-                                <a href="{{ route('register') }}" class="text-gray-300 hover:text-white block text-sm">Register</a>
+                                <a href="{{ route('login') }}" class="text-gray-300 hover:text-white block text-sm">Masuk</a>
+                                <a href="{{ route('register') }}" class="text-gray-300 hover:text-white block text-sm">Daftar</a>
                             @endauth
                         </div>
                     </div>
                     
                     <div>
-                        <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Contact</h3>
+                        <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Kontak</h3>
                         <div class="mt-4 space-y-2 text-gray-300 text-sm">
                             <p>Email: info@rentro.id</p>
                             <p>Phone: +62 xxx xxxx xxxx</p>
@@ -243,7 +243,7 @@
                 
                 <div class="mt-8 border-t border-gray-700 pt-8">
                     <p class="text-center text-gray-400 text-sm">
-                        © {{ date('Y') }} Rentro.id. All rights reserved.
+                        © {{ date('Y') }} Rentro.id. Hak cipta dilindungi.
                     </p>
                 </div>
             </div>
