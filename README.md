@@ -45,7 +45,20 @@ vendor_status ENUM: 'pending', 'approved', 'rejected', 'suspended'
 - **Produk Platform** (vendor_id = null): 100% pendapatan ke platform
 - **Produk Vendor** (vendor_id = user_id): Vendor menerima `Total Harga - Komisi`
 
-## 🚀 Instalasi & Setup
+## 📚 Dokumentasi Lengkap
+
+- 📖 **[TUTORIAL-PEMULA.md](TUTORIAL-PEMULA.md)** - Panduan step-by-step untuk pemula
+- 🔧 **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Solusi masalah umum dan debugging
+- 🚀 **[DEPLOYMENT.md](DEPLOYMENT.md)** - Panduan deployment ke production
+- 💻 **[DEVELOPMENT.md](DEVELOPMENT.md)** - Panduan development lanjutan
+
+## 🚀 Quick Start
+
+### Untuk Pemula
+**Jika Anda baru belajar web development**, ikuti panduan lengkap di **[TUTORIAL-PEMULA.md](TUTORIAL-PEMULA.md)** yang mencakup instalasi software hingga testing aplikasi.
+
+### Untuk Developer Berpengalaman
+Jika sudah familiar dengan Laravel, ikuti instalasi cepat di bawah ini:
 
 ### Persyaratan Sistem
 - PHP 8.1 atau lebih tinggi
@@ -197,9 +210,23 @@ Aplikasi ini dikembangkan untuk keperluan akademik (Tugas Akhir/Skripsi). Silaka
 
 Project ini menggunakan lisensi MIT. Lihat file `LICENSE` untuk detail lengkap.
 
-## 🆘 Support
+## 🆘 Support & Bantuan
 
-Untuk pertanyaan teknis atau bantuan development, silakan buat issue di repository ini.
+### 📖 Dokumentasi
+1. **[TUTORIAL-PEMULA.md](TUTORIAL-PEMULA.md)** - Mulai di sini jika baru belajar
+2. **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Jika mengalami error atau masalah
+3. **[DEPLOYMENT.md](DEPLOYMENT.md)** - Saat akan deploy ke production
+4. **[DEVELOPMENT.md](DEVELOPMENT.md)** - Untuk pengembangan lanjutan
+
+### 🔧 Masalah Umum
+- **Error saat instalasi?** → Baca [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+- **Bingung cara start?** → Ikuti [TUTORIAL-PEMULA.md](TUTORIAL-PEMULA.md)
+- **Mau deploy ke hosting?** → Ikuti [DEPLOYMENT.md](DEPLOYMENT.md)
+
+### 💬 Komunitas
+- Create issue di GitHub repository ini
+- Stack Overflow dengan tag `laravel` dan `rentro-id`
+- Komunitas Laravel Indonesia
 
 ---
 
