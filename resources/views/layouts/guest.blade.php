@@ -16,6 +16,11 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-br from-primary-50 to-primary-100">
+            <!-- Language Switcher -->
+            <div class="absolute top-4 right-4">
+                <x-language-switcher />
+            </div>
+            
             <div class="mb-6">
                 <a href="/" class="flex flex-col items-center space-y-2">
                     <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center">

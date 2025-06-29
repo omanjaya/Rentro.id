@@ -27,17 +27,20 @@
                     </div>
                     
                     <div class="flex items-center space-x-4">
-                        <a href="{{ route('products.index') }}" class="text-gray-600 hover:text-gray-900">Products</a>
+                        <!-- Language Switcher -->
+                        <x-language-switcher />
+                        
+                        <a href="{{ route('products.index') }}" class="text-gray-600 hover:text-gray-900">{{ t('nav.products') }}</a>
                         
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="text-gray-600 hover:text-gray-900">Dashboard</a>
+                            <a href="{{ url('/dashboard') }}" class="text-gray-600 hover:text-gray-900">{{ t('nav.dashboard') }}</a>
                             <form method="POST" action="{{ route('logout') }}" class="inline">
                                 @csrf
-                                <button type="submit" class="text-gray-600 hover:text-gray-900">Logout</button>
+                                <button type="submit" class="text-gray-600 hover:text-gray-900">{{ t('nav.logout') }}</button>
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">Login</a>
-                            <a href="{{ route('register') }}" class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700">Register</a>
+                            <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900">{{ t('nav.login') }}</a>
+                            <a href="{{ route('register') }}" class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700">{{ t('nav.register') }}</a>
                         @endauth
                     </div>
                 </div>

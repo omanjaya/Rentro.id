@@ -92,6 +92,21 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
+                <!-- Language Switcher for Mobile -->
+                <div class="px-4 py-2">
+                    <div class="text-sm font-medium text-gray-500 mb-2">{{ t('nav.language') ?? 'Language' }}</div>
+                    <div class="flex space-x-2">
+                        <a href="?lang=id" class="flex items-center px-3 py-2 text-sm rounded-md {{ current_locale() == 'id' ? 'bg-primary-100 text-primary-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                            <img src="https://flagcdn.com/w20/id.png" alt="ID" class="w-4 h-3 mr-2">
+                            ID
+                        </a>
+                        <a href="?lang=en" class="flex items-center px-3 py-2 text-sm rounded-md {{ current_locale() == 'en' ? 'bg-primary-100 text-primary-700' : 'text-gray-600 hover:bg-gray-100' }}">
+                            <img src="https://flagcdn.com/w20/gb.png" alt="EN" class="w-4 h-3 mr-2">
+                            EN
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
