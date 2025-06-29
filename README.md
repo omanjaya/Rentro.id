@@ -1,61 +1,206 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏢 Rentro.id - Marketplace Penyewaan Peralatan Elektronik
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi marketplace multi-sisi untuk penyewaan peralatan elektronik yang dibangun dengan Laravel 12. Platform ini menghubungkan pemilik peralatan (vendor) dengan pelanggan yang membutuhkan penyewaan perangkat elektronik.
 
-## About Laravel
+## 🌟 Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 📱 **Multi-User System**
+- **Pelanggan Individu** - Penyewaan pribadi untuk perorangan
+- **Pelanggan Bisnis** - Akun perusahaan dengan fitur penyewaan massal  
+- **Vendor/Penyedia** - Pemilik peralatan yang menyewakan inventaris mereka
+- **Admin** - Manajemen platform dengan kontrol penuh sistem
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 💼 **Fitur Marketplace Lanjutan**
+- ✅ Sistem verifikasi dan persetujuan vendor
+- ✅ Revenue sharing berbasis komisi (12-15% komisi platform)
+- ✅ Workflow persetujuan listing produk
+- ✅ Manajemen stok otomatis
+- ✅ Pelacakan pendapatan dan analitik
+- ✅ Sistem dashboard multi-tier
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🛒 **Sistem Pemesanan Canggih**
+- ✅ Pengecekan ketersediaan real-time via AJAX
+- ✅ Kalkulasi harga dinamis dengan JavaScript
+- ✅ Validasi tanggal dan pencegahan konflik
+- ✅ Manajemen stok dengan update otomatis
+- ✅ Konfirmasi pemesanan dengan kode rental unik
 
-## Learning Laravel
+## 🗂️ Kategori Produk
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Laptop & Komputer** - Perangkat performa tinggi
+2. **Kamera & Fotografi** - Peralatan profesional
+3. **Audio & Sound** - Perangkat rekam dan playback
+4. **Gaming** - Konsol dan aksesori gaming
+5. **Mobile & Tablet** - Perangkat portabel dan aksesori
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🏗️ Arsitektur Sistem
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Tipe Pengguna & Peran
+```
+user_type ENUM: 'individual', 'business', 'vendor', 'admin'
+vendor_status ENUM: 'pending', 'approved', 'rejected', 'suspended'
+```
 
-## Laravel Sponsors
+### Model Pendapatan
+- **Produk Platform** (vendor_id = null): 100% pendapatan ke platform
+- **Produk Vendor** (vendor_id = user_id): Vendor menerima `Total Harga - Komisi`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Instalasi & Setup
 
-### Premium Partners
+### Persyaratan Sistem
+- PHP 8.1 atau lebih tinggi
+- Composer
+- Node.js & NPM
+- SQLite/MySQL
+- Laravel 12
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Langkah Instalasi
 
-## Contributing
+1. **Clone Repository**
+```bash
+git clone [repository-url]
+cd Rentro.id
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Install Dependencies**
+```bash
+# Backend dependencies
+composer install
 
-## Code of Conduct
+# Frontend dependencies  
+npm install && npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Environment Setup**
+```bash
+# Copy environment file
+cp .env.example .env
 
-## Security Vulnerabilities
+# Generate application key
+php artisan key:generate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Configure database di .env
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+```
 
-## License
+4. **Database Setup**
+```bash
+# Run migrations dengan sample data
+php artisan migrate:fresh --seed
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Setup storage symlink
+php artisan storage:link
+```
+
+5. **Start Development Server**
+```bash
+php artisan serve
+```
+
+Aplikasi akan berjalan di `http://localhost:8000`
+
+## 👤 Data User Sample
+
+### Admin
+- **Email:** admin@rentro.id
+- **Password:** password
+- **Akses:** Manajemen sistem lengkap
+
+### Vendor
+- **Email:** vendor@example.com / **Password:** password
+- **Email:** techstore@example.com / **Password:** password
+- **Status:** Vendor yang sudah disetujui dengan produk
+
+### Pelanggan
+- **Email:** john@example.com / **Password:** password (Individu)
+- **Email:** jane@example.com / **Password:** password (Individu)  
+- **Email:** corporate@example.com / **Password:** password (Bisnis)
+
+## 🛡️ Fitur Keamanan
+
+- **Laravel Breeze** untuk autentikasi aman
+- **Middleware berbasis peran** untuk kontrol akses
+- **Perlindungan CSRF** pada semua form
+- **Validasi input** komprehensif dengan Form Request classes
+- **Keamanan upload file** dengan validasi tipe dan ukuran
+- **Pencegahan SQL injection** melalui Eloquent ORM
+
+## 🎨 Teknologi & Design
+
+- **Backend:** Laravel 12 dengan arsitektur MVC
+- **Frontend:** Tailwind CSS untuk design responsif
+- **Database:** SQLite/MySQL dengan optimisasi indexing
+- **JavaScript:** Vanilla JS untuk interaksi dinamis
+- **Template Engine:** Blade dengan komponen reusable
+
+## 📊 Dashboard & Analytics
+
+### Dashboard Admin
+- Pelacakan total pendapatan lintas platform dan vendor
+- Metrik registrasi pengguna berdasarkan tipe
+- Analitik performa produk
+- Distribusi status rental
+
+### Dashboard Vendor  
+- Pelacakan pendapatan personal setelah komisi
+- Metrik performa produk
+- Statistik manajemen rental
+
+## 🔄 Workflow Status
+
+### Workflow Listing Produk
+```
+Vendor Buat → Review Pending → Persetujuan Admin → Live di Platform
+```
+
+### Workflow Persetujuan Rental
+**Produk Platform:**
+```
+Pelanggan Pesan → Admin Setujui → Admin Aktifkan → Admin Selesaikan
+```
+
+**Produk Vendor:**
+```
+Pelanggan Pesan → Vendor Setujui/Aktifkan → Vendor Selesaikan
+```
+
+## 🌐 Bahasa
+
+Aplikasi ini telah di-hardcode menggunakan **Bahasa Indonesia** secara penuh untuk memenuhi kebutuhan presentasi akademik. Semua interface, form, pesan, dan navigasi ditampilkan dalam Bahasa Indonesia.
+
+## 🛠️ Commands Berguna
+
+```bash
+# Refresh database dengan data marketplace
+php artisan migrate:fresh --seed
+
+# Clear caches
+php artisan config:clear && php artisan view:clear && php artisan route:clear
+
+# Production optimization
+php artisan config:cache && php artisan route:cache && php artisan view:cache
+```
+
+## 📝 Development Notes
+
+- Gunakan **absolute paths** untuk semua file operations
+- Ikuti **coding standards** Laravel dengan PSR-12
+- **Test thoroughly** sebelum deployment
+- **Backup database** sebelum migration besar
+
+## 🤝 Kontribusi
+
+Aplikasi ini dikembangkan untuk keperluan akademik (Tugas Akhir/Skripsi). Silakan fork dan kembangkan sesuai kebutuhan Anda.
+
+## 📄 Lisensi
+
+Project ini menggunakan lisensi MIT. Lihat file `LICENSE` untuk detail lengkap.
+
+## 🆘 Support
+
+Untuk pertanyaan teknis atau bantuan development, silakan buat issue di repository ini.
+
+---
+
+**Rentro.id** - Transforming electronic equipment rental through innovative marketplace technology. 🚀
