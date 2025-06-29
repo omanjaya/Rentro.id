@@ -154,7 +154,7 @@ class DashboardController extends Controller
             ->orderBy('month')
             ->get()
             ->mapWithKeys(function ($item) {
-                return [Carbon::create()->month($item->month)->format('M') => $item->count];
+                return [Carbon::create()->month((int)$item->month)->format('M') => $item->count];
             });
     }
 
@@ -170,7 +170,7 @@ class DashboardController extends Controller
             ->orderBy('month')
             ->get()
             ->mapWithKeys(function ($item) {
-                return [Carbon::create()->month($item->month)->format('M') => $item->revenue];
+                return [Carbon::create()->month((int)$item->month)->format('M') => $item->revenue];
             });
     }
 }
