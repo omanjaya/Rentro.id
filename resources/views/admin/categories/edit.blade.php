@@ -43,9 +43,19 @@
                             </div>
 
                             <div>
-                                <x-input-label for="icon" :value="__('Icon (Optional)')" />
-                                <x-text-input id="icon" name="icon" type="text" class="mt-1 block w-full" :value="old('icon', $category->icon)" placeholder="e.g., fas fa-laptop, heroicon-laptop" />
-                                <p class="text-sm text-gray-500 mt-1">CSS class for icon (FontAwesome, Heroicons, etc.)</p>
+                                <x-input-label for="icon" :value="__('Icon SVG (Optional)')" />
+                                <textarea id="icon" name="icon" rows="3" 
+                                          class="mt-1 block w-full border-gray-300 focus:border-primary-500 focus:ring-primary-500 rounded-md shadow-sm font-mono text-sm"
+                                          placeholder='<svg class="w-6 h-6" fill="none" stroke="currentColor">...'>{{ old('icon', $category->icon) }}</textarea>
+                                <p class="text-sm text-gray-500 mt-1">SVG code for the icon (will be displayed in category listings)</p>
+                                @if($category->icon)
+                                    <div class="mt-2 flex items-center space-x-2">
+                                        <span class="text-sm text-gray-500">Current icon:</span>
+                                        <div class="w-8 h-8 text-primary-600">
+                                            {!! $category->icon !!}
+                                        </div>
+                                    </div>
+                                @endif
                                 <x-input-error class="mt-2" :messages="$errors->get('icon')" />
                             </div>
                         </div>

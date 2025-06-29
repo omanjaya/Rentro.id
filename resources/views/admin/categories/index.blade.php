@@ -31,7 +31,13 @@
                 <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
                     <div class="flex items-start justify-between">
                         <div class="flex items-center space-x-3">
-                            <div class="text-3xl">{{ $category->icon ?? '📦' }}</div>
+                            <div class="text-3xl">
+                                @if($category->icon)
+                                    {!! $category->icon !!}
+                                @else
+                                    📦
+                                @endif
+                            </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900">{{ $category->name }}</h3>
                                 <p class="text-sm text-gray-500">{{ $category->products_count }} products</p>

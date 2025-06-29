@@ -33,8 +33,8 @@
                     <div class="lg:col-span-2">
                         <div class="flex items-start space-x-4">
                             @if($category->icon)
-                                <div class="w-16 h-16 bg-primary-500 rounded-lg flex items-center justify-center">
-                                    <i class="{{ $category->icon }} text-white text-2xl"></i>
+                                <div class="w-16 h-16 bg-primary-500 rounded-lg flex items-center justify-center text-white">
+                                    {!! $category->icon !!}
                                 </div>
                             @else
                                 <div class="w-16 h-16 bg-gray-300 rounded-lg flex items-center justify-center">
